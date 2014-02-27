@@ -1,4 +1,4 @@
-# CITYTECH, Inc. CQ Groovy Extension
+# CITYTECH, Inc. AEM Groovy Extension
 
 [CITYTECH, Inc.](http://www.citytechinc.com)
 
