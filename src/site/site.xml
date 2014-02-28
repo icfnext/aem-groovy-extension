@@ -10,7 +10,7 @@
 
     <bannerRight>
         <name>${project.name}</name>
-        <href>./index.html</href>
+        <href>http://code.citytechinc.com/aem-groovy-extension</href>
     </bannerRight>
 
     <custom>
@@ -27,7 +27,7 @@
             <topNav>reports</topNav>
             <brand>
                 <name>${project.name}</name>
-                <href>./index.html</href>
+                <href>http://code.citytechinc.com/aem-groovy-extension</href>
             </brand>
             <slogan></slogan>
             <body />
@@ -40,6 +40,7 @@
     <body>
         <links>
             <item name="GitHub" href="https://github.com/Citytechinc/aem-groovy-extension" />
+            <item name="Overview" href="index.html" />
         </links>
         <menu ref="reports"/>
     </body>
