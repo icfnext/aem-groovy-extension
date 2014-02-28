@@ -39,7 +39,7 @@
 
     <body>
         <links>
-            <item name="GitHub" href="https://github.com/Citytechinc/cq-groovy-extension" />
+            <item name="GitHub" href="https://github.com/Citytechinc/aem-groovy-extension" />
         </links>
         <menu ref="reports"/>
     </body>
