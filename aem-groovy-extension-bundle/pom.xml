@@ -19,10 +19,10 @@
 
     <profiles>
         <profile>
-            <id>install-bundle</id>
+            <id>install-bundles</id>
             <activation>
                 <property>
-                    <name>install-bundle</name>
+                    <name>install-bundles</name>
                 </property>
             </activation>
             <properties>
@@ -34,11 +34,41 @@
             <build>
                 <plugins>
                     <plugin>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>2.8</version>
+                        <executions>
+                            <execution>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>copy-dependencies</goal>
+                                </goals>
+                                <configuration>
+                                    <includeGroupIds>org.codehaus.groovy</includeGroupIds>
+                                    <includeArtifactIds>groovy-all</includeArtifactIds>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
                         <groupId>org.apache.sling</groupId>
                         <artifactId>maven-sling-plugin</artifactId>
                         <version>2.1.0</version>
                         <executions>
                             <execution>
+                                <id>install-groovy</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>install</goal>
+                                </goals>
+                                <configuration>
+                                    <bundleFileName>${project.build.directory}/dependency/groovy-all-${groovy.version}.jar</bundleFileName>
+                                    <slingUrl>http://${aem.host}:${aem.port}/system/console/install</slingUrl>
+                                    <user>${aem.username}</user>
+                                    <password>${aem.password}</password>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>install-groovy-extension</id>
                                 <phase>install</phase>
                                 <goals>
                                     <goal>install</goal>
