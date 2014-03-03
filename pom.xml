@@ -14,7 +14,7 @@
     <packaging>pom</packaging>
     <version>0.6.0</version>
     <name>AEM Groovy Extension</name>
-    <description>OSGi bundle containing Groovy builders and metaclasses for Adobe AEM (CQ).</description>
+    <description>OSGi bundle containing Groovy builders and metaclasses for AEM (Adobe CQ).</description>
 
     <organization>
         <name>CITYTECH, Inc.</name>
