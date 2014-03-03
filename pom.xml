@@ -44,10 +44,6 @@
             <id>citytech-public</id>
             <url>http://nexus.citytech.ctmsp.com/content/groups/public</url>
         </repository>
-        <repository>
-            <id>localhost</id>
-            <url>http://localhost:4502/maven/repository</url>
-        </repository>
     </repositories>
 
     <pluginRepositories>
@@ -254,7 +250,6 @@
                     <aggregate>true</aggregate>
                 </configuration>
             </plugin>
-            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-changes-plugin</artifactId>
@@ -269,7 +264,6 @@
                     </reportSet>
                 </reportSets>
             </plugin>
-            -->
         </plugins>
     </reporting>
 
