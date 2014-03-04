@@ -2,28 +2,18 @@ package com.citytechinc.aem.groovy.extension.builders
 
 import javax.jcr.Session
 
-class NodeBuilder extends BuilderSupport {
-
-    def session
-
-    def currentNode
+class NodeBuilder extends AbstractContentBuilder {
 
     NodeBuilder(Session session) {
-        this.session = session
-
-        currentNode = session.rootNode
+        super(session, session.rootNode)
     }
 
     NodeBuilder(Session session, Node rootNode) {
-        this.session = session
-
-        currentNode = rootNode
+        super(session, rootNode)
     }
 
     NodeBuilder(Session session, String rootPath) {
-        this.session = session
-
-        currentNode = session.getNode(rootPath)
+        super(session, session.getNode(rootPath))
     }
 
     @Override
@@ -56,23 +46,5 @@ class NodeBuilder extends BuilderSupport {
         setProperties(currentNode, properties)
 
         currentNode
-    }
-
-    @Override
-    void setParent(parent, child) {
-
-    }
-
-    @Override
-    void nodeCompleted(parent, node) {
-        session.save()
-
-        currentNode = currentNode.parent
-    }
-
-    void setProperties(node, properties) {
-        properties.each { k, v ->
-            node.set(k, v)
-        }
     }
 }

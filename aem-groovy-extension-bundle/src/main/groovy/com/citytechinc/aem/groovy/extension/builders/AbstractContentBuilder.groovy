@@ -1,0 +1,34 @@
+package com.citytechinc.aem.groovy.extension.builders
+
+import javax.jcr.Node
+import javax.jcr.Session
+
+abstract class AbstractContentBuilder extends BuilderSupport {
+
+    Session session
+
+    Node currentNode
+
+    AbstractContentBuilder(session, currentNode) {
+        this.session = session
+        this.currentNode = currentNode
+    }
+
+    @Override
+    void nodeCompleted(parent, node) {
+        session.save()
+
+        currentNode = currentNode.parent
+    }
+
+    @Override
+    void setParent(parent, child) {
+
+    }
+
+    void setProperties(node, properties) {
+        properties.each { name, value ->
+            node.set(name, value)
+        }
+    }
+}
