@@ -4,12 +4,12 @@
     <parent>
         <groupId>com.citytechinc.aem.groovy.extension</groupId>
         <artifactId>aem-groovy-extension</artifactId>
-        <version>0.6.0</version>
+        <version>0.6.1</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>aem-groovy-extension-tests</artifactId>
-    <version>0.6.0</version>
+    <version>0.6.1</version>
     <packaging>jar</packaging>
     <name>AEM Groovy Extension Tests</name>
 
@@ -19,37 +19,9 @@
             <plugin>
                 <groupId>org.codehaus.groovy</groupId>
                 <artifactId>groovy-eclipse-compiler</artifactId>
-                <version>2.8.0-01</version>
-                <extensions>true</extensions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
-                        <artifactId>groovy-eclipse-batch</artifactId>
-                        <version>2.1.8-01</version>
-                    </dependency>
-                </dependencies>
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <compilerId>groovy-eclipse-compiler</compilerId>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                    <encoding>utf-8</encoding>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
-                        <artifactId>groovy-eclipse-compiler</artifactId>
-                        <version>2.8.0-01</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
-                        <artifactId>groovy-eclipse-batch</artifactId>
-                        <version>2.1.8-01</version>
-                    </dependency>
-                </dependencies>
             </plugin>
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -70,6 +42,12 @@
                     <includes>
                         <include>**/*Spec*</include>
                     </includes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
                 </configuration>
             </plugin>
             <plugin>
