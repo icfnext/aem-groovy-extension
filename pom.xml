@@ -5,16 +5,16 @@
     <parent>
         <groupId>com.citytechinc.aem</groupId>
         <artifactId>parent</artifactId>
-        <version>6.0.0-SNAPSHOT</version>
+        <version>6.0.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.citytechinc.aem.groovy.extension</groupId>
     <artifactId>aem-groovy-extension</artifactId>
     <packaging>pom</packaging>
-    <version>0.6.0-SNAPSHOT</version>
+    <version>0.6.0</version>
     <name>AEM Groovy Extension</name>
-    <description>OSGi bundle containing Groovy builders and metaclasses for Adobe AEM (CQ).</description>
+    <description>OSGi bundle containing Groovy builders and metaclasses for AEM (Adobe CQ).</description>
 
     <organization>
         <name>CITYTECH, Inc.</name>
@@ -44,10 +44,6 @@
             <id>citytech-public</id>
             <url>http://nexus.citytech.ctmsp.com/content/groups/public</url>
         </repository>
-        <repository>
-            <id>localhost</id>
-            <url>http://localhost:4502/maven/repository</url>
-        </repository>
     </repositories>
 
     <pluginRepositories>
@@ -70,7 +66,6 @@
     </distributionManagement>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.junit.usefile>false</maven.junit.usefile>
         <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss.SSSZ</maven.build.timestamp.format>
@@ -254,7 +249,6 @@
                     <aggregate>true</aggregate>
                 </configuration>
             </plugin>
-            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-changes-plugin</artifactId>
@@ -269,7 +263,6 @@
                     </reportSet>
                 </reportSets>
             </plugin>
-            -->
         </plugins>
     </reporting>
 
@@ -280,52 +273,12 @@
             <artifactId>jcr</artifactId>
         </dependency>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.commons.json</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.jcr.resource</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.day.cq.wcm</groupId>
             <artifactId>cq-wcm-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.day.cq.wcm</groupId>
-            <artifactId>cq-wcm-commons</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.day.cq.wcm</groupId>
-            <artifactId>cq-wcm-core</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.day.cq</groupId>
             <artifactId>cq-commons</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.day.cq</groupId>
-            <artifactId>cq-tagging</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.day.cq.wcm</groupId>
-            <artifactId>cq-msm-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.compendium</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.adobe.granite</groupId>
-            <artifactId>com.adobe.granite.replication.core</artifactId>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
