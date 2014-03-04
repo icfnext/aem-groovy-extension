@@ -4,19 +4,87 @@
     <parent>
         <groupId>com.citytechinc.aem.groovy.extension</groupId>
         <artifactId>aem-groovy-extension</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>0.6.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>aem-groovy-extension-bundle</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>0.6.0</version>
     <packaging>bundle</packaging>
     <name>AEM Groovy Extension Bundle</name>
-    <description>...</description>
 
     <properties>
         <maven.test.skip>true</maven.test.skip>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>install-bundles</id>
+            <activation>
+                <property>
+                    <name>install-bundles</name>
+                </property>
+            </activation>
+            <properties>
+                <aem.host>localhost</aem.host>
+                <aem.port>4502</aem.port>
+                <aem.username>admin</aem.username>
+                <aem.password>admin</aem.password>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>2.8</version>
+                        <executions>
+                            <execution>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>copy-dependencies</goal>
+                                </goals>
+                                <configuration>
+                                    <includeGroupIds>org.codehaus.groovy</includeGroupIds>
+                                    <includeArtifactIds>groovy-all</includeArtifactIds>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.sling</groupId>
+                        <artifactId>maven-sling-plugin</artifactId>
+                        <version>2.1.0</version>
+                        <executions>
+                            <execution>
+                                <id>install-groovy</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>install</goal>
+                                </goals>
+                                <configuration>
+                                    <bundleFileName>${project.build.directory}/dependency/groovy-all-${groovy.version}.jar</bundleFileName>
+                                    <slingUrl>http://${aem.host}:${aem.port}/system/console/install</slingUrl>
+                                    <user>${aem.username}</user>
+                                    <password>${aem.password}</password>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>install-groovy-extension</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>install</goal>
+                                </goals>
+                                <configuration>
+                                    <slingUrl>http://${aem.host}:${aem.port}/system/console/install</slingUrl>
+                                    <user>${aem.username}</user>
+                                    <password>${aem.password}</password>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <build>
         <sourceDirectory>src/main/groovy</sourceDirectory>
@@ -81,7 +149,7 @@
                 <configuration>
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-                        <Export-Package>!*.impl.*,com.citytechinc.cq.groovy.extension.*</Export-Package>
+                        <Export-Package>!*.impl.*,com.citytechinc.aem.groovy.extension.*</Export-Package>
                         <DynamicImport-Package>*</DynamicImport-Package>
                     </instructions>
                 </configuration>
@@ -110,82 +178,20 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <artifactId>maven-site-plugin</artifactId>
+                <configuration>
+                    <generateReports>false</generateReports>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
     <dependencies>
-        <!-- compile -->
         <dependency>
             <groupId>org.apache.felix</groupId>
             <artifactId>org.apache.felix.scr.annotations</artifactId>
             <version>1.9.6</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-nop</artifactId>
-            <version>1.6.4</version>
-        </dependency>
-
-        <!-- provided -->
-        <dependency>
-            <groupId>javax.jcr</groupId>
-            <artifactId>jcr</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.commons.json</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.jcr.resource</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.day.cq.wcm</groupId>
-            <artifactId>cq-wcm-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.day.cq.wcm</groupId>
-            <artifactId>cq-wcm-commons</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.day.cq.wcm</groupId>
-            <artifactId>cq-wcm-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.day.cq</groupId>
-            <artifactId>cq-commons</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.day.cq</groupId>
-            <artifactId>cq-tagging</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.day.cq.wcm</groupId>
-            <artifactId>cq-msm-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.compendium</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.adobe.granite</groupId>
-            <artifactId>com.adobe.granite.replication.core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
         </dependency>
     </dependencies>
 </project>

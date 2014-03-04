@@ -4,15 +4,14 @@
     <parent>
         <groupId>com.citytechinc.aem.groovy.extension</groupId>
         <artifactId>aem-groovy-extension</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>0.6.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>aem-groovy-extension-tests</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>0.6.0</version>
     <packaging>jar</packaging>
     <name>AEM Groovy Extension Tests</name>
-    <description>...</description>
 
     <build>
         <testSourceDirectory>src/test/groovy</testSourceDirectory>
@@ -73,82 +72,20 @@
                     </includes>
                 </configuration>
             </plugin>
+            <plugin>
+                <artifactId>maven-site-plugin</artifactId>
+                <configuration>
+                    <generateReports>false</generateReports>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
     <dependencies>
-        <!-- compile -->
-        <dependency>
-            <groupId>org.apache.felix</groupId>
-            <artifactId>org.apache.felix.scr.annotations</artifactId>
-            <version>1.9.6</version>
-        </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-nop</artifactId>
             <version>1.6.4</version>
-        </dependency>
-
-        <!-- provided -->
-        <dependency>
-            <groupId>javax.jcr</groupId>
-            <artifactId>jcr</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.commons.json</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.jcr.resource</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.day.cq.wcm</groupId>
-            <artifactId>cq-wcm-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.day.cq.wcm</groupId>
-            <artifactId>cq-wcm-commons</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.day.cq.wcm</groupId>
-            <artifactId>cq-wcm-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.day.cq</groupId>
-            <artifactId>cq-commons</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.day.cq</groupId>
-            <artifactId>cq-tagging</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.day.cq.wcm</groupId>
-            <artifactId>cq-msm-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.compendium</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.adobe.granite</groupId>
-            <artifactId>com.adobe.granite.replication.core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
         </dependency>
 
         <!-- test -->
@@ -161,7 +98,7 @@
         <dependency>
             <groupId>com.citytechinc.aem.spock</groupId>
             <artifactId>spock-aem</artifactId>
-            <version>0.7.0-SNAPSHOT</version>
+            <version>0.7.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
