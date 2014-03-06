@@ -1,8 +1,8 @@
 package com.citytechinc.aem.groovy.extension.builders
 
-import com.citytechinc.aem.groovy.extension.AbstractGroovyExtensionSpec
+import com.citytechinc.aem.groovy.extension.GroovyExtensionSpec
 
-class PageBuilderSpec extends AbstractGroovyExtensionSpec {
+class PageBuilderSpec extends GroovyExtensionSpec {
 
     def "build page"() {
         setup:

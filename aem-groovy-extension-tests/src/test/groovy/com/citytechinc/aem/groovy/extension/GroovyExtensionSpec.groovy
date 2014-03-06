@@ -1,9 +1,9 @@
 package com.citytechinc.aem.groovy.extension
 
-import com.citytechinc.aem.spock.specs.AbstractSlingRepositorySpec
+import com.citytechinc.aem.spock.specs.AemSpec
 import com.day.cq.wcm.api.PageManager
 
-abstract class AbstractGroovyExtensionSpec extends AbstractSlingRepositorySpec {
+abstract class GroovyExtensionSpec extends AemSpec {
 
     def cleanup() {
         removeAllNodes()

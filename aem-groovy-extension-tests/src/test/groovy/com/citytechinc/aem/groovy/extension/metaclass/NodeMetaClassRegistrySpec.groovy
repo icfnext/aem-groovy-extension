@@ -1,9 +1,9 @@
 package com.citytechinc.aem.groovy.extension.metaclass
 
-import com.citytechinc.aem.groovy.extension.AbstractGroovyExtensionSpec
+import com.citytechinc.aem.groovy.extension.GroovyExtensionSpec
 import spock.lang.Unroll
 
-class NodeMetaClassRegistrySpec extends AbstractGroovyExtensionSpec {
+class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
 
     def setup() {
         nodeBuilder.test {
