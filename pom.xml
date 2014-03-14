@@ -26,8 +26,6 @@
         <url>https://github.com/Citytechinc/aem-groovy-extension/issues</url>
     </issueManagement>
 
-    <url>https://github.com/Citytechinc/aem-groovy-extension</url>
-
     <modules>
         <module>aem-groovy-extension-bundle</module>
         <module>aem-groovy-extension-tests</module>

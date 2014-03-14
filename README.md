@@ -21,7 +21,7 @@ OSGi bundle containing Groovy builders and metaclasses for AEM (Adobe CQ).
         <dependency>
             <groupId>com.citytechinc.aem.groovy.extension</groupId>
             <artifactId>aem-groovy-extension-bundle</artifactId>
-            <version>0.6.0</version>
+            <version>0.6.2</version>
             <scope>provided</scope>
         </dependency>
 
