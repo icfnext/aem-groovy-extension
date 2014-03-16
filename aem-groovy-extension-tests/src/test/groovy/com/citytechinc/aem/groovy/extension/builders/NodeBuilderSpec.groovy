@@ -4,6 +4,10 @@ import com.citytechinc.aem.groovy.extension.GroovyExtensionSpec
 
 class NodeBuilderSpec extends GroovyExtensionSpec {
 
+    def cleanup() {
+        removeAllNodes()
+    }
+
     def "build unstructured node"() {
         setup:
         nodeBuilder.foo()
