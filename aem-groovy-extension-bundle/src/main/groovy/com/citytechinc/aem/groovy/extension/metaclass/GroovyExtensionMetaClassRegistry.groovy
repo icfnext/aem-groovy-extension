@@ -46,31 +46,31 @@ class GroovyExtensionMetaClassRegistry {
                 delegate.nodes
             }
 
-            recurse { Closure c ->
-                c(delegate)
+            recurse { Closure closure ->
+                closure(delegate)
 
                 delegate.nodes.each { node ->
-                    node.recurse(c)
+                    node.recurse(closure)
                 }
             }
 
-            recurse { String primaryNodeTypeName, c ->
+            recurse { String primaryNodeTypeName, Closure closure ->
                 if (delegate.primaryNodeType.name == primaryNodeTypeName) {
-                    c(delegate)
+                    closure(delegate)
                 }
 
                 delegate.nodes.findAll { it.primaryNodeType.name == primaryNodeTypeName }.each { node ->
-                    node.recurse(primaryNodeTypeName, c)
+                    node.recurse(primaryNodeTypeName, closure)
                 }
             }
 
-            recurse { Collection<String> primaryNodeTypeNames, c ->
+            recurse { Collection<String> primaryNodeTypeNames, Closure closure ->
                 if (primaryNodeTypeNames.contains(delegate.primaryNodeType.name)) {
-                    c(delegate)
+                    closure(delegate)
                 }
 
                 delegate.nodes.findAll { primaryNodeTypeNames.contains(it.primaryNodeType.name) }.each { node ->
-                    node.recurse(primaryNodeTypeNames, c)
+                    node.recurse(primaryNodeTypeNames, closure)
                 }
             }
 
@@ -166,11 +166,11 @@ class GroovyExtensionMetaClassRegistry {
                 delegate.listChildren()
             }
 
-            recurse { Closure c ->
-                c(delegate)
+            recurse { Closure closure ->
+                closure(delegate)
 
                 delegate.listChildren().each { child ->
-                    child.recurse(c)
+                    child.recurse(closure)
                 }
             }
 

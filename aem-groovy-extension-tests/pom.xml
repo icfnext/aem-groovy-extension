@@ -4,12 +4,12 @@
     <parent>
         <groupId>com.citytechinc.aem.groovy.extension</groupId>
         <artifactId>aem-groovy-extension</artifactId>
-        <version>0.6.1</version>
+        <version>0.6.2</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>aem-groovy-extension-tests</artifactId>
-    <version>0.6.1</version>
+    <version>0.6.2</version>
     <packaging>jar</packaging>
     <name>AEM Groovy Extension Tests</name>
 
@@ -50,12 +50,6 @@
                     <skip>true</skip>
                 </configuration>
             </plugin>
-            <plugin>
-                <artifactId>maven-site-plugin</artifactId>
-                <configuration>
-                    <generateReports>false</generateReports>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 
@@ -74,9 +68,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.citytechinc.aem.spock</groupId>
-            <artifactId>spock-aem</artifactId>
-            <version>0.7.0</version>
+            <groupId>com.citytechinc.aem.prosper</groupId>
+            <artifactId>prosper</artifactId>
+            <version>0.8.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

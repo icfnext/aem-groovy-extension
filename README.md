@@ -14,24 +14,22 @@ OSGi bundle containing Groovy builders and metaclasses for AEM (Adobe CQ).
         }
     }
 
-See the [project site](http://code.citytechinc.com/aem-groovy-extension) for additional details.
-
 ## Usage
 
-1. Add Maven dependency to project POM.
+1. Add dependency to your project's Maven `pom.xml`.
 
         <dependency>
             <groupId>com.citytechinc.aem.groovy.extension</groupId>
             <artifactId>aem-groovy-extension-bundle</artifactId>
-            <version>0.6.0</version>
+            <version>0.6.2</version>
             <scope>provided</scope>
         </dependency>
 
-2. Install Groovy and extension OSGi bundles.
+2. Install Groovy and extension OSGi bundles from the command line.
 
         mvn install -P install-bundles
 
-    To install to a non-localhost AEM environment, connection parameters can be passed as Maven properties on the command line (see bundle `pom.xml` for additional property names).
+    To install to a non-localhost AEM environment, connection parameters can be passed as Maven properties on the command line (see bundle `pom.xml` for additional environment property names).
 
         mvn install -P install-bundles -Daem.host=hostname -Daem.port=7402
 

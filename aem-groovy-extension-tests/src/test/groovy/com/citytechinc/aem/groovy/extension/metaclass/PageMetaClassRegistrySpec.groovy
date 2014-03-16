@@ -1,10 +1,10 @@
 package com.citytechinc.aem.groovy.extension.metaclass
 
-import com.citytechinc.aem.groovy.extension.AbstractGroovyExtensionSpec
+import com.citytechinc.aem.groovy.extension.GroovyExtensionSpec
 import com.day.cq.wcm.api.NameConstants
 import spock.lang.Unroll
 
-class PageMetaClassRegistrySpec extends AbstractGroovyExtensionSpec {
+class PageMetaClassRegistrySpec extends GroovyExtensionSpec {
 
     def setup() {
         pageBuilder.content {

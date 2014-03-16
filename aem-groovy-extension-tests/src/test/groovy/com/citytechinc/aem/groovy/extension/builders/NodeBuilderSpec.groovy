@@ -1,8 +1,12 @@
 package com.citytechinc.aem.groovy.extension.builders
 
-import com.citytechinc.aem.groovy.extension.AbstractGroovyExtensionSpec
+import com.citytechinc.aem.groovy.extension.GroovyExtensionSpec
 
-class NodeBuilderSpec extends AbstractGroovyExtensionSpec {
+class NodeBuilderSpec extends GroovyExtensionSpec {
+
+    def cleanup() {
+        removeAllNodes()
+    }
 
     def "build unstructured node"() {
         setup:
