@@ -2,6 +2,7 @@ package com.citytechinc.aem.groovy.extension.builders
 
 import com.day.cq.commons.jcr.JcrConstants
 import com.day.cq.wcm.api.NameConstants
+import com.day.cq.wcm.api.Page
 
 import javax.jcr.Node
 import javax.jcr.Session
@@ -10,6 +11,14 @@ class PageBuilder extends AbstractContentBuilder {
 
     PageBuilder(Session session) {
         super(session, session.rootNode)
+    }
+
+    PageBuilder(Session session, Page rootPage) {
+        super(session, session.getNode(rootPage.path))
+    }
+
+    PageBuilder(Session session, String rootPath) {
+        super(session, session.getNode(rootPath))
     }
 
     @Override

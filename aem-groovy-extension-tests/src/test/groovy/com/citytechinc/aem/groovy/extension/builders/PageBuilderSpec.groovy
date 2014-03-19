@@ -1,12 +1,19 @@
 package com.citytechinc.aem.groovy.extension.builders
 
 import com.citytechinc.aem.groovy.extension.GroovyExtensionSpec
+import spock.lang.Shared
 
 class PageBuilderSpec extends GroovyExtensionSpec {
 
+    @Shared builder
+
+    def setupSpec() {
+        builder = new PageBuilder(session)
+    }
+
     def "build page"() {
         setup:
-        pageBuilder.foo()
+        builder.foo()
 
         expect:
         assertNodeExists("/foo", "cq:Page")
@@ -17,7 +24,7 @@ class PageBuilderSpec extends GroovyExtensionSpec {
         setup:
         def pageProperties = ["sling:resourceType": "foundation/components/page"]
 
-        pageBuilder.content {
+        builder.content {
             citytechinc("CITYTECH, Inc.", pageProperties)
         }
 
@@ -30,7 +37,7 @@ class PageBuilderSpec extends GroovyExtensionSpec {
         def pageProperties = ["sling:resourceType": "foundation/components/page"]
         def parProperties = ["sling:resourceType": "foundation/components/parsys"]
 
-        pageBuilder.content {
+        builder.content {
             citytechinc("CITYTECH, Inc.") {
                 "jcr:content"(pageProperties) {
                     mainpar(parProperties)
@@ -39,22 +46,13 @@ class PageBuilderSpec extends GroovyExtensionSpec {
         }
 
         expect:
-        assertPageExistsInternal("/content/citytechinc")
-        // assertPageExists("/content/citytechinc", pageProperties + ["jcr:title": "CITYTECH, Inc."])
+        assertPageExists("/content/citytechinc", pageProperties + ["jcr:title": "CITYTECH, Inc."])
         assertNodeExists("/content/citytechinc/jcr:content/mainpar", parProperties)
-    }
-
-    void assertPageExistsInternal(String path) {
-        def page = pageManager.getPage(path)
-
-        assert page
-        assert session.nodeExists(path)
-        assert session.nodeExists(path + "/jcr:content")
     }
 
     def "build page with descendant node of given type"() {
         setup:
-        pageBuilder.content {
+        builder.content {
             citytechinc("CITYTECH, Inc.") {
                 "jcr:content" {
                     derp("sling:Folder")
@@ -71,7 +69,7 @@ class PageBuilderSpec extends GroovyExtensionSpec {
         def page1Properties = ["sling:resourceType": "foundation/components/page"]
         def page2Properties = ["sling:resourceType": "foundation/components/page"]
 
-        pageBuilder.content {
+        builder.content {
             citytechinc("CITYTECH, Inc.") {
                 "jcr:content"(page1Properties)
             }
@@ -83,5 +81,25 @@ class PageBuilderSpec extends GroovyExtensionSpec {
         expect:
         assertPageExists("/content/citytechinc", page1Properties + ["jcr:title": "CITYTECH, Inc."])
         assertPageExists("/content/ctmsp", page2Properties + ["jcr:title": "CTMSP"])
+    }
+
+    def "build page with root page"() {
+        setup:
+        builder.foo()
+
+        new PageBuilder(session, getPage("/foo")).bar()
+
+        expect:
+        assertPageExists("/foo/bar")
+    }
+
+    def "build page with root path"() {
+        setup:
+        builder.foo()
+
+        new PageBuilder(session, "/foo").bar()
+
+        expect:
+        assertPageExists("/foo/bar")
     }
 }

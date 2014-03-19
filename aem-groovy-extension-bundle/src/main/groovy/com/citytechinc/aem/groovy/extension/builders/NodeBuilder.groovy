@@ -1,5 +1,6 @@
 package com.citytechinc.aem.groovy.extension.builders
 
+import javax.jcr.Node
 import javax.jcr.Session
 
 class NodeBuilder extends AbstractContentBuilder {

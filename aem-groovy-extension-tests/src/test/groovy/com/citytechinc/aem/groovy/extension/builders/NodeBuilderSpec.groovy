@@ -1,16 +1,19 @@
 package com.citytechinc.aem.groovy.extension.builders
 
 import com.citytechinc.aem.groovy.extension.GroovyExtensionSpec
+import spock.lang.Shared
 
 class NodeBuilderSpec extends GroovyExtensionSpec {
 
-    def cleanup() {
-        removeAllNodes()
+    @Shared builder
+
+    def setupSpec() {
+        builder = new NodeBuilder(session)
     }
 
     def "build unstructured node"() {
         setup:
-        nodeBuilder.foo()
+        builder.foo()
 
         expect:
         assertNodeExists("/foo", "nt:unstructured")
@@ -18,7 +21,7 @@ class NodeBuilderSpec extends GroovyExtensionSpec {
 
     def "build node with type"() {
         setup:
-        nodeBuilder.foo("sling:Folder")
+        builder.foo("sling:Folder")
 
         expect:
         assertNodeExists("/foo", "sling:Folder")
@@ -28,7 +31,7 @@ class NodeBuilderSpec extends GroovyExtensionSpec {
         setup:
         def properties = ["jcr:title": "Foo", "sling:resourceType": "foo/bar"]
 
-        nodeBuilder.foo(properties)
+        builder.foo(properties)
 
         expect:
         assertNodeExists("/foo", properties)
@@ -38,7 +41,7 @@ class NodeBuilderSpec extends GroovyExtensionSpec {
         setup:
         def properties = ["date": Calendar.instance, "number": 1L, "array": ["one", "two", "three"].toArray(new String[0])]
 
-        nodeBuilder.foo(properties)
+        builder.foo(properties)
 
         expect:
         assertNodeExists("/foo", properties)
@@ -48,7 +51,7 @@ class NodeBuilderSpec extends GroovyExtensionSpec {
         setup:
         def properties = ["jcr:title": "Foo"]
 
-        nodeBuilder.foo("sling:Folder", properties)
+        builder.foo("sling:Folder", properties)
 
         expect:
         assertNodeExists("/foo", "sling:Folder", properties)
@@ -56,7 +59,7 @@ class NodeBuilderSpec extends GroovyExtensionSpec {
 
     def "build node hierarchy"() {
         setup:
-        nodeBuilder.foo {
+        builder.foo {
             bar()
         }
 
@@ -66,7 +69,7 @@ class NodeBuilderSpec extends GroovyExtensionSpec {
 
     def "build node hierarchy with type"() {
         setup:
-        nodeBuilder.foo("sling:Folder") {
+        builder.foo("sling:Folder") {
             bar("sling:Folder")
         }
 
@@ -80,12 +83,34 @@ class NodeBuilderSpec extends GroovyExtensionSpec {
         def fooProperties = ["jcr:title": "Foo"]
         def barProperties = ["jcr:title": "Bar"]
 
-        nodeBuilder.foo("sling:Folder", fooProperties) {
+        builder.foo("sling:Folder", fooProperties) {
             bar("sling:Folder", barProperties)
         }
 
         expect:
         assertNodeExists("/foo", "sling:Folder", fooProperties)
         assertNodeExists("/foo/bar", "sling:Folder", barProperties)
+    }
+
+    def "build node with root node"() {
+        setup:
+        session.rootNode.addNode("foo")
+        session.save()
+
+        new NodeBuilder(session, getNode("/foo")).bar()
+
+        expect:
+        assertNodeExists("/foo/bar")
+    }
+
+    def "build node with root path"() {
+        setup:
+        session.rootNode.addNode("foo")
+        session.save()
+
+        new NodeBuilder(session, "/foo").bar()
+
+        expect:
+        assertNodeExists("/foo/bar")
     }
 }
