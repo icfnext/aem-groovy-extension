@@ -1,19 +1,12 @@
 package com.citytechinc.aem.groovy.extension.builders
 
 import com.citytechinc.aem.groovy.extension.GroovyExtensionSpec
-import spock.lang.Shared
 
 class NodeBuilderSpec extends GroovyExtensionSpec {
 
-    @Shared builder
-
-    def setupSpec() {
-        builder = new NodeBuilder(session)
-    }
-
     def "build unstructured node"() {
         setup:
-        builder.foo()
+        nodeBuilder.foo()
 
         expect:
         assertNodeExists("/foo", "nt:unstructured")
@@ -21,7 +14,7 @@ class NodeBuilderSpec extends GroovyExtensionSpec {
 
     def "build node with type"() {
         setup:
-        builder.foo("sling:Folder")
+        nodeBuilder.foo("sling:Folder")
 
         expect:
         assertNodeExists("/foo", "sling:Folder")
@@ -31,7 +24,7 @@ class NodeBuilderSpec extends GroovyExtensionSpec {
         setup:
         def properties = ["jcr:title": "Foo", "sling:resourceType": "foo/bar"]
 
-        builder.foo(properties)
+        nodeBuilder.foo(properties)
 
         expect:
         assertNodeExists("/foo", properties)
@@ -41,7 +34,7 @@ class NodeBuilderSpec extends GroovyExtensionSpec {
         setup:
         def properties = ["date": Calendar.instance, "number": 1L, "array": ["one", "two", "three"].toArray(new String[0])]
 
-        builder.foo(properties)
+        nodeBuilder.foo(properties)
 
         expect:
         assertNodeExists("/foo", properties)
@@ -51,7 +44,7 @@ class NodeBuilderSpec extends GroovyExtensionSpec {
         setup:
         def properties = ["jcr:title": "Foo"]
 
-        builder.foo("sling:Folder", properties)
+        nodeBuilder.foo("sling:Folder", properties)
 
         expect:
         assertNodeExists("/foo", "sling:Folder", properties)
@@ -59,7 +52,7 @@ class NodeBuilderSpec extends GroovyExtensionSpec {
 
     def "build node hierarchy"() {
         setup:
-        builder.foo {
+        nodeBuilder.foo {
             bar()
         }
 
@@ -69,7 +62,7 @@ class NodeBuilderSpec extends GroovyExtensionSpec {
 
     def "build node hierarchy with type"() {
         setup:
-        builder.foo("sling:Folder") {
+        nodeBuilder.foo("sling:Folder") {
             bar("sling:Folder")
         }
 
@@ -83,7 +76,7 @@ class NodeBuilderSpec extends GroovyExtensionSpec {
         def fooProperties = ["jcr:title": "Foo"]
         def barProperties = ["jcr:title": "Bar"]
 
-        builder.foo("sling:Folder", fooProperties) {
+        nodeBuilder.foo("sling:Folder", fooProperties) {
             bar("sling:Folder", barProperties)
         }
 

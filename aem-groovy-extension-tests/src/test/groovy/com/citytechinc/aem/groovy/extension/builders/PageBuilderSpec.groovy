@@ -1,19 +1,12 @@
 package com.citytechinc.aem.groovy.extension.builders
 
 import com.citytechinc.aem.groovy.extension.GroovyExtensionSpec
-import spock.lang.Shared
 
 class PageBuilderSpec extends GroovyExtensionSpec {
 
-    @Shared builder
-
-    def setupSpec() {
-        builder = new PageBuilder(session)
-    }
-
     def "build page"() {
         setup:
-        builder.foo()
+        pageBuilder.foo()
 
         expect:
         assertNodeExists("/foo", "cq:Page")
@@ -24,7 +17,7 @@ class PageBuilderSpec extends GroovyExtensionSpec {
         setup:
         def pageProperties = ["sling:resourceType": "foundation/components/page"]
 
-        builder.content {
+        pageBuilder.content {
             citytechinc("CITYTECH, Inc.", pageProperties)
         }
 
@@ -37,7 +30,7 @@ class PageBuilderSpec extends GroovyExtensionSpec {
         def pageProperties = ["sling:resourceType": "foundation/components/page"]
         def parProperties = ["sling:resourceType": "foundation/components/parsys"]
 
-        builder.content {
+        pageBuilder.content {
             citytechinc("CITYTECH, Inc.") {
                 "jcr:content"(pageProperties) {
                     mainpar(parProperties)
@@ -52,7 +45,7 @@ class PageBuilderSpec extends GroovyExtensionSpec {
 
     def "build page with descendant node of given type"() {
         setup:
-        builder.content {
+        pageBuilder.content {
             citytechinc("CITYTECH, Inc.") {
                 "jcr:content" {
                     derp("sling:Folder")
@@ -69,7 +62,7 @@ class PageBuilderSpec extends GroovyExtensionSpec {
         def page1Properties = ["sling:resourceType": "foundation/components/page"]
         def page2Properties = ["sling:resourceType": "foundation/components/page"]
 
-        builder.content {
+        pageBuilder.content {
             citytechinc("CITYTECH, Inc.") {
                 "jcr:content"(page1Properties)
             }
@@ -85,7 +78,7 @@ class PageBuilderSpec extends GroovyExtensionSpec {
 
     def "build page with root page"() {
         setup:
-        builder.foo()
+        pageBuilder.foo()
 
         new PageBuilder(session, getPage("/foo")).bar()
 
@@ -95,7 +88,7 @@ class PageBuilderSpec extends GroovyExtensionSpec {
 
     def "build page with root path"() {
         setup:
-        builder.foo()
+        pageBuilder.foo()
 
         new PageBuilder(session, "/foo").bar()
 

@@ -27,7 +27,7 @@ class GroovyExtensionMetaClassRegistry {
     private static void registerBinaryMetaClass() {
         Binary.metaClass {
             withBinary { Closure c ->
-                def result
+                def result = null
 
                 try {
                     result = c(delegate)

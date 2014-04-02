@@ -70,8 +70,14 @@
         <dependency>
             <groupId>com.citytechinc.aem.prosper</groupId>
             <artifactId>prosper</artifactId>
-            <version>0.9.0</version>
+            <version>0.9.1-SNAPSHOT</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.citytechinc.aem.groovy.extension</groupId>
+                    <artifactId>aem-groovy-extension-bundle</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 </project>
