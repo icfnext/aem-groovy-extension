@@ -190,4 +190,52 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
         expect:
         !node.removeNode("child4")
     }
+
+    def "get next sibling"() {
+        setup:
+        def child = getNode(childPath)
+
+        when:
+        def nextSibling = child.getNextSibling()
+
+        then:
+        nextSibling.path == nextSiblingPath
+
+        where:
+        childPath      | nextSiblingPath
+        "/test/child1" | "/test/child2"
+        "/test/child2" | "/test/child3"
+    }
+
+    def "get next sibling with last sibling"() {
+        setup:
+        def child = getNode("/test/child3")
+
+        expect:
+        !child.getNextSibling()
+    }
+
+    def "get prev sibling"() {
+        setup:
+        def child = getNode(childPath)
+
+        when:
+        def prevSibling = child.getPrevSibling()
+
+        then:
+        prevSibling.path == prevSiblingPath
+
+        where:
+        childPath      | prevSiblingPath
+        "/test/child2" | "/test/child1"
+        "/test/child3" | "/test/child2"
+    }
+
+    def "get prev sibling with first sibling"() {
+        setup:
+        def child = getNode("/test/child1")
+
+        expect:
+        !child.getPrevSibling()
+	}
 }
