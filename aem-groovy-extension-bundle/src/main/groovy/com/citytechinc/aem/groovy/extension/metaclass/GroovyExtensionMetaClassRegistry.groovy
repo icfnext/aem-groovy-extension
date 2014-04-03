@@ -9,16 +9,68 @@ import javax.jcr.PropertyType
 import javax.jcr.Value
 
 /**
+ * Add additional methods to <code>Page</code>, <code>Node</code>, and <code>Binary</code> instances.  Registered
+ * metamethods are available for all instances of these classes.
+ * <p/>
+ * <a href="http://dev.day.com/content/docs/en/cq/current/javadoc/com/day/cq/wcm/api/Page.html">com.day.cq.wcm.api.Page</a>
  *
+ * <ul>
+ *     <li>iterator() - Allows usage of Groovy closure operators (<code>each</code>,
+ *     <code>eachWithIndex</code>) to iterate over child pages of the current page.</li>
+ *     <li>recurse(Closure closure) - Recursively invoke this closure on each descendant page of the current page.</li>
+ *     <li>getNode() - Get the <code>jcr:content</code> node of the current page, returning null if it does not exist
+ *     .</li>
+ *     <li>get(String propertyName) - Get the named property value from the <code>jcr:content</code> node of the
+ *     current page, with the return type determined dynamically by <a href="http://www.day
+ *     .com/maven/jsr170/javadocs/jcr-2.0/javax/jcr/Property.html#getType()" target="_blank">Property.getType()</a>
+ *     .</li>
+ *     <li>set(String propertyName, Object value) - Set the named property value on the <code>jcr:content</code> node
+ *     of the current page.  An array value argument can be used to set multi-valued properties.</li>
+ * </ul>
+ *
+ * <a href="http://www.day.com/maven/jsr170/javadocs/jcr-2.0/javax/jcr/Node.html">javax.jcr.Node</a>
+ *
+ * <ul>
+ *     <li>iterator() - Allows usage of Groovy closure operators (<code>each</code>,
+ *     <code>eachWithIndex</code>) to iterate over child nodes of the current node.</li>
+ *     <li>get(String propertyName) - Get the named property value, with the return type determined dynamically by <a
+ *     href="http://www.day.com/maven/jsr170/javadocs/jcr-2.0/javax/jcr/Property.html#getType()"
+ *     target="_blank">Property.getType()</a>.</li>
+ *     <li>set(String propertyName, Object value) - Set the named property value.  An array value argument can be
+ *     used to set multi-valued properties.</li>
+ *     <li>getOrAddNode(String name) - Get the named child node if it exists; otherwise, add it.</li>
+ *     <li>getOrAddNode(String name, String primaryNodeTypeName) - Get the named child node if it exists; otherwise,
+ *     add it with the given node type.</li>
+ *     <li>removeNode(String name) - Remove the child node with the given name,
+ *     returning true if the node was removed.</li>
+ *     <li>recurse(Closure closure) - Recursively invoke this closure on each descendant node of the current node.</li>
+ *     <li>recurse(String primaryNodeTypeName, Closure closure) - Recursively invoke this closure on each descendant
+ *     node of the current node that matches the given node type.</li>
+ *     <li>recurse(Collection&lt;String&gt; primaryNodeTypeNames, Closure closure) - Recursively invoke this closure
+ *     on each descendant node of the current node that matches any of the given node types.</li>
+ * </ul>
+ *
+ * <a href="http://www.day.com/maven/jsr170/javadocs/jcr-2.0/javax/jcr/Binary.html">javax.jcr.Binary</a>
+ *
+ * <ul>
+ *     <li>withBinary(Closure closure) - Execute the closure and automatically dispose of the binary's resources when
+ *     the closure completes.  The closure accepts a single argument with the current binary instance.</li>
+ * </ul>
  */
 class GroovyExtensionMetaClassRegistry {
 
+    /**
+     * Register metaclasses.
+     */
     static void registerMetaClasses() {
         registerBinaryMetaClass()
         registerNodeMetaClass()
         registerPageMetaClass()
     }
 
+    /**
+     * Remove all metaclasses from the registry.
+     */
     static void removeMetaClasses() {
         def metaRegistry = InvokerHelper.metaRegistry
 
