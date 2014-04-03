@@ -8,6 +8,9 @@ import javax.jcr.Node
 import javax.jcr.PropertyType
 import javax.jcr.Value
 
+/**
+ *
+ */
 class GroovyExtensionMetaClassRegistry {
 
     static void registerMetaClasses() {
