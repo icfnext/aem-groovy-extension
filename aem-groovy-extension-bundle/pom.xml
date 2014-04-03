@@ -142,7 +142,7 @@
                                          classname="org.codehaus.groovy.ant.Groovydoc"
                                          classpathref="maven.compile.classpath"
                                     />
-                                <groovydoc destdir="../target/site/groovydoc"
+                                <groovydoc destdir="${project.reporting.outputDirectory}/groovydocs"
                                            sourcepath="${basedir}/src/main/groovy"
                                            packagenames="com.citytechinc.aem.groovy.extension.builders.*,com.citytechinc.aem.groovy.extension.metaclass.*"
                                            use="true"
@@ -165,7 +165,7 @@
                     <execution>
                         <phase>deploy</phase>
                         <goals>
-                            <goal>jar-no-fork</goal>
+                            <goal>jar</goal>
                         </goals>
                     </execution>
                 </executions>

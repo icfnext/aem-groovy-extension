@@ -76,7 +76,7 @@
         <dependency>
             <groupId>com.citytechinc.aem.prosper</groupId>
             <artifactId>prosper</artifactId>
-            <version>0.9.1-SNAPSHOT</version>
+            <version>0.10.0</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
