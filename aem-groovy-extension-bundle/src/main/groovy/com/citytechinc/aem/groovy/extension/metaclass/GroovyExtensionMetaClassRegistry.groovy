@@ -185,26 +185,34 @@ class GroovyExtensionMetaClassRegistry {
             }
 
             getNextSibling {
-                def siblings = delegate.parent.getNodes()
-                while(siblings.hasNext()){
-                    if(delegate.isSame(siblings.nextNode())){
+                def siblings = delegate.parent.nodes
+
+                while (siblings.hasNext()) {
+                    if (delegate.isSame(siblings.nextNode())) {
                         break
                     }
                 }
-                return siblings.hasNext() ? siblings.nextNode() : null
+
+                siblings.hasNext() ? siblings.nextNode() : null
             }
 
             getPrevSibling {
-                def siblings = delegate.parent.getNodes()
+                def siblings = delegate.parent.nodes
                 def prevSibling = null
-                while(siblings.hasNext()){
+                def result = null
+
+                while (siblings.hasNext()) {
                     def sibling = siblings.nextNode()
-                    if(delegate.isSame(sibling)){
-                        return prevSibling
+
+                    if (delegate.isSame(sibling)) {
+                        result = prevSibling
+                        break
                     }
+
                     prevSibling = sibling
                 }
-                return null
+
+                result
             }
         }
     }
