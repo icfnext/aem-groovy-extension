@@ -1,7 +1,29 @@
 package com.citytechinc.aem.groovy.extension.builders
 
+import javax.jcr.Node
 import javax.jcr.Session
 
+/**
+ * Builder for JCR content nodes.  Each "node" in the syntax tree corresponds to a JCR node in the repository. A new
+ * JCR node is created only if there is no existing node for the current name.
+ *
+ * <pre>
+ * nodeBuilder.etc {
+ *     satirists("sling:Folder") {
+ *         bierce(firstName: "Ambrose", lastName: "Bierce", birthDate: Calendar.instance.updated(year: 1842, month: 5, date: 24))
+ *         mencken(firstName: "H.L.", lastName: "Mencken", birthDate: Calendar.instance.updated(year: 1880, month: 8, date: 12))
+ *         other("sling:Folder", "jcr:title": "Other")
+ *     }
+ * }
+ * </pre>
+ *
+ * <ul>
+ *     <li>A single string argument represents the node type name for the node ("satirists").</li>
+ *     <li>A map argument uses the provided key:value pairs to set property values on the node ("bierce" and
+ *     "mencken").</li>
+ *     <li>Both string and map arguments will set the node type and property value(s) for the node ("other").</li>
+ * </ul>
+ */
 class NodeBuilder extends AbstractContentBuilder {
 
     NodeBuilder(Session session) {

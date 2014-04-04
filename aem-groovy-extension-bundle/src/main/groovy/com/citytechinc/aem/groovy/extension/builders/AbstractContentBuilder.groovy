@@ -3,6 +3,9 @@ package com.citytechinc.aem.groovy.extension.builders
 import javax.jcr.Node
 import javax.jcr.Session
 
+/**
+ * Base class for <code>Page</code> and <code>Node</code> builders.
+ */
 abstract class AbstractContentBuilder extends BuilderSupport {
 
     Session session

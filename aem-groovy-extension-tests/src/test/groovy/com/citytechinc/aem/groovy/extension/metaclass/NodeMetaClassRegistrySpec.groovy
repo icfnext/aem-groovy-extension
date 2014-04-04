@@ -3,6 +3,7 @@ package com.citytechinc.aem.groovy.extension.metaclass
 import com.citytechinc.aem.groovy.extension.GroovyExtensionSpec
 import spock.lang.Unroll
 
+@Unroll
 class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
 
     def setup() {
@@ -82,7 +83,6 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
         node.get("multiValuedProperty") == ["1", "2"]
     }
 
-    @Unroll
     def "set"() {
         setup:
         def node = getNode("/test/child3")
@@ -125,7 +125,6 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
         node.get("testProperty").stream.text == this.class.getResourceAsStream("/file").text
     }
 
-    @Unroll
     def "set multiple"() {
         setup:
         def node = getNode("/test/child3")
@@ -140,7 +139,6 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
         value << [["one", "two"], ["one", "two", "three"].toArray()]
     }
 
-    @Unroll
     def "get or add node"() {
         setup:
         def node = getNode("/test")
@@ -157,7 +155,6 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
         "child4"     | "/test/child4"
     }
 
-    @Unroll
     def "get or add node with type"() {
         setup:
         def node = getNode("/test")
@@ -190,4 +187,52 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
         expect:
         !node.removeNode("child4")
     }
+
+    def "get next sibling"() {
+        setup:
+        def child = getNode(childPath)
+
+        when:
+        def nextSibling = child.nextSibling
+
+        then:
+        nextSibling.path == nextSiblingPath
+
+        where:
+        childPath      | nextSiblingPath
+        "/test/child1" | "/test/child2"
+        "/test/child2" | "/test/child3"
+    }
+
+    def "get next sibling with last sibling"() {
+        setup:
+        def child = getNode("/test/child3")
+
+        expect:
+        !child.nextSibling
+    }
+
+    def "get prev sibling"() {
+        setup:
+        def child = getNode(childPath)
+
+        when:
+        def prevSibling = child.prevSibling
+
+        then:
+        prevSibling.path == prevSiblingPath
+
+        where:
+        childPath      | prevSiblingPath
+        "/test/child2" | "/test/child1"
+        "/test/child3" | "/test/child2"
+    }
+
+    def "get prev sibling with first sibling"() {
+        setup:
+        def child = getNode("/test/child1")
+
+        expect:
+        !child.prevSibling
+	}
 }

@@ -39,17 +39,8 @@ class PageBuilderSpec extends GroovyExtensionSpec {
         }
 
         expect:
-        assertPageExistsInternal("/content/citytechinc")
-        // assertPageExists("/content/citytechinc", pageProperties + ["jcr:title": "CITYTECH, Inc."])
+        assertPageExists("/content/citytechinc", pageProperties + ["jcr:title": "CITYTECH, Inc."])
         assertNodeExists("/content/citytechinc/jcr:content/mainpar", parProperties)
-    }
-
-    void assertPageExistsInternal(String path) {
-        def page = pageManager.getPage(path)
-
-        assert page
-        assert session.nodeExists(path)
-        assert session.nodeExists(path + "/jcr:content")
     }
 
     def "build page with descendant node of given type"() {
@@ -83,5 +74,25 @@ class PageBuilderSpec extends GroovyExtensionSpec {
         expect:
         assertPageExists("/content/citytechinc", page1Properties + ["jcr:title": "CITYTECH, Inc."])
         assertPageExists("/content/ctmsp", page2Properties + ["jcr:title": "CTMSP"])
+    }
+
+    def "build page with root page"() {
+        setup:
+        pageBuilder.foo()
+
+        new PageBuilder(session, getPage("/foo")).bar()
+
+        expect:
+        assertPageExists("/foo/bar")
+    }
+
+    def "build page with root path"() {
+        setup:
+        pageBuilder.foo()
+
+        new PageBuilder(session, "/foo").bar()
+
+        expect:
+        assertPageExists("/foo/bar")
     }
 }

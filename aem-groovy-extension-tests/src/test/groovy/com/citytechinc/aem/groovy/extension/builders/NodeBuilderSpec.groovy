@@ -4,10 +4,6 @@ import com.citytechinc.aem.groovy.extension.GroovyExtensionSpec
 
 class NodeBuilderSpec extends GroovyExtensionSpec {
 
-    def cleanup() {
-        removeAllNodes()
-    }
-
     def "build unstructured node"() {
         setup:
         nodeBuilder.foo()
@@ -87,5 +83,27 @@ class NodeBuilderSpec extends GroovyExtensionSpec {
         expect:
         assertNodeExists("/foo", "sling:Folder", fooProperties)
         assertNodeExists("/foo/bar", "sling:Folder", barProperties)
+    }
+
+    def "build node with root node"() {
+        setup:
+        session.rootNode.addNode("foo")
+        session.save()
+
+        new NodeBuilder(session, getNode("/foo")).bar()
+
+        expect:
+        assertNodeExists("/foo/bar")
+    }
+
+    def "build node with root path"() {
+        setup:
+        session.rootNode.addNode("foo")
+        session.save()
+
+        new NodeBuilder(session, "/foo").bar()
+
+        expect:
+        assertNodeExists("/foo/bar")
     }
 }

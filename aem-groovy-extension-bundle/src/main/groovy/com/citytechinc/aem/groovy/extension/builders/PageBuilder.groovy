@@ -2,14 +2,52 @@ package com.citytechinc.aem.groovy.extension.builders
 
 import com.day.cq.commons.jcr.JcrConstants
 import com.day.cq.wcm.api.NameConstants
+import com.day.cq.wcm.api.Page
 
 import javax.jcr.Node
 import javax.jcr.Session
 
+/**
+ * Builder for AEM pages.  Each "node" in the syntax tree corresponds to a <code<cq:Page</code> node,
+ * unless the node is a descendant of a <code>jcr:content</code> node, in which case nodes are treated in the same
+ * manner as <code>NodeBuilder</code>.
+ *
+ * <pre>
+ * pageBuilder.content {
+ *     beer {
+ *         styles("Styles") {
+ *             "jcr:content"("jcr:lastModifiedBy": "me", "jcr:lastModified": Calendar.instance) {
+ *                 data("sling:Folder")
+ *             }
+ *             dubbel("Dubbel")
+ *             tripel("Tripel")
+ *             saison("Saison")
+ *         }
+ *         breweries("Breweries", "jcr:lastModifiedBy": "me", "jcr:lastModified": Calendar.instance)
+ *     }
+ * }
+ * </pre>
+ *
+ * <ul>
+ *     <li>A single string argument is used to set the page title rather than the node type ("styles").</li>
+ *     <li>Descendants of <code>jcr:content</code> nodes are not created with the <code>cq:Page</code> type by
+ *     default and can have their own node type specified as described for the Node builder ("data").</li>
+ *     <li>Page properties can be passed directly as arguments on the page node without explicitly creating a
+ *     <code>jcr:content</code> node first ("breweries").</li>
+ * </ul>
+ */
 class PageBuilder extends AbstractContentBuilder {
 
     PageBuilder(Session session) {
         super(session, session.rootNode)
+    }
+
+    PageBuilder(Session session, Page rootPage) {
+        super(session, session.getNode(rootPage.path))
+    }
+
+    PageBuilder(Session session, String rootPath) {
+        super(session, session.getNode(rootPath))
     }
 
     @Override
