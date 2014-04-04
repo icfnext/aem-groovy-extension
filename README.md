@@ -6,13 +6,15 @@
 
 OSGi bundle containing Groovy builders and metaclasses for AEM (Adobe CQ).
 
-    new NodeBuilder(session).content {
-        satirists("sling:Folder") {
-            bierce(firstName: "Ambrose", lastName: "Bierce", birthDate: Calendar.instance.updated(year: 1842, month: 5, date: 24))
-            mencken(firstName: "H.L.", lastName: "Mencken", birthDate: Calendar.instance.updated(year: 1880, month: 8, date: 12))
-            other("sling:Folder", "jcr:title": "Other")
-        }
+```groovy
+new NodeBuilder(session).content {
+    satirists("sling:Folder") {
+        bierce(firstName: "Ambrose", lastName: "Bierce", birthDate: Calendar.instance.updated(year: 1842, month: 5, date: 24))
+        mencken(firstName: "H.L.", lastName: "Mencken", birthDate: Calendar.instance.updated(year: 1880, month: 8, date: 12))
+        other("sling:Folder", "jcr:title": "Other")
     }
+}
+```
 
 ## Usage
 
