@@ -165,6 +165,12 @@ class GroovyExtensionMetaClassRegistry {
                 }
             }
 
+            set { Map properties ->
+                properties?.each { name, value ->
+                    delegate.set(name, value)
+                }
+            }
+
             getOrAddNode { String name ->
                 delegate.hasNode(name) ? delegate.getNode(name) : delegate.addNode(name)
             }
