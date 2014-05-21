@@ -69,7 +69,7 @@
         <maven.junit.usefile>false</maven.junit.usefile>
         <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss.SSSZ</maven.build.timestamp.format>
         <timestamp>${maven.build.timestamp}</timestamp>
-        <groovy.version>2.2.2</groovy.version>
+        <groovy.version>2.3.1</groovy.version>
     </properties>
 
     <profiles>
