@@ -139,6 +139,18 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
         value << [["one", "two"], ["one", "two", "three"].toArray()]
     }
 
+    def "set map"() {
+        setup:
+        def map = [one: "a", two: "b", three: 1, four: Calendar.instance]
+        def node = getNode("/test")
+
+        when:
+        node.set(map)
+
+        then:
+        assertNodeExists("/test", map)
+    }
+
     def "get or add node"() {
         setup:
         def node = getNode("/test")
