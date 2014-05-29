@@ -4,12 +4,12 @@
     <parent>
         <groupId>com.citytechinc.aem.groovy.extension</groupId>
         <artifactId>aem-groovy-extension</artifactId>
-        <version>0.8.1-SNAPSHOT</version>
+        <version>0.8.1</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>aem-groovy-extension-bundle</artifactId>
-    <version>0.8.1-SNAPSHOT</version>
+    <version>0.8.1</version>
     <packaging>bundle</packaging>
     <name>AEM Groovy Extension Bundle</name>
 
@@ -138,21 +138,10 @@
                         </goals>
                         <configuration>
                             <target>
-                                <taskdef name="groovydoc"
-                                         classname="org.codehaus.groovy.ant.Groovydoc"
-                                         classpathref="maven.compile.classpath"
-                                    />
-                                <groovydoc destdir="${project.reporting.outputDirectory}/groovydocs"
-                                           sourcepath="${basedir}/src/main/groovy"
-                                           packagenames="com.citytechinc.aem.groovy.extension.builders.*,com.citytechinc.aem.groovy.extension.metaclass.*"
-                                           use="true"
-                                           windowtitle="${project.name}"
-                                           doctitle="${project.name}"
-                                    >
-                                    <link packages="java.,org.xml.,javax.,org.xml."
-                                          href="http://download.oracle.com/javase/6/docs/api" />
-                                    <link packages="groovy.,org.codehaus.groovy."
-                                          href="http://groovy.codehaus.org/api/" />
+                                <taskdef name="groovydoc" classname="org.codehaus.groovy.ant.Groovydoc" classpathref="maven.compile.classpath" />
+                                <groovydoc destdir="${project.reporting.outputDirectory}/groovydocs" sourcepath="${basedir}/src/main/groovy" packagenames="com.citytechinc.aem.groovy.extension.builders.*,com.citytechinc.aem.groovy.extension.metaclass.*" use="true" windowtitle="${project.name}" doctitle="${project.name}">
+                                    <link packages="java.,org.xml.,javax.,org.xml." href="http://download.oracle.com/javase/6/docs/api" />
+                                    <link packages="groovy.,org.codehaus.groovy." href="http://groovy.codehaus.org/api/" />
                                 </groovydoc>
                             </target>
                         </configuration>
