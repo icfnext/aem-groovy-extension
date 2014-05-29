@@ -179,7 +179,6 @@
                         <hotfixBranchPrefix>hotfix-</hotfixBranchPrefix>
                     </flowInitContext>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <noReleaseBuild>true</noReleaseBuild>
                 </configuration>
             </plugin>
             <plugin>
