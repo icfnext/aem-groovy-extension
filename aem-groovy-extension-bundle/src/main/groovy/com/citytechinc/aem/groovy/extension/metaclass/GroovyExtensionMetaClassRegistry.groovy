@@ -247,9 +247,19 @@ class GroovyExtensionMetaClassRegistry {
                 break
             case PropertyType.STRING:
                 result = value.string
+                break
+            case PropertyType.REFERENCE:
+                result = getNodeFromValue(value)
+            case PropertyType.WEAKREFERENCE:
+                result = getNodeFromValue(value)
         }
 
         result
+    }
+
+    private static def getNodeFromValue(value) {
+        def uuid = value.string
+        uuid ? value.session.getNodeByIdentifier(uuid) : null
     }
 
     private static void registerPageMetaClass() {
