@@ -4,6 +4,7 @@ import com.citytechinc.aem.groovy.extension.GroovyExtensionSpec
 import com.day.cq.wcm.api.NameConstants
 import spock.lang.Unroll
 
+@Unroll
 class PageMetaClassRegistrySpec extends GroovyExtensionSpec {
 
     def setup() {
@@ -62,7 +63,6 @@ class PageMetaClassRegistrySpec extends GroovyExtensionSpec {
         !page.node
     }
 
-    @Unroll
     def "get"() {
         setup:
         def page = getPage("/content/citytechinc")
