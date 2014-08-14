@@ -6,6 +6,7 @@ import org.codehaus.groovy.runtime.InvokerHelper
 import javax.jcr.Binary
 import javax.jcr.Node
 import javax.jcr.PropertyType
+import javax.jcr.Session
 import javax.jcr.Value
 
 /**
@@ -136,9 +137,9 @@ class GroovyExtensionMetaClassRegistry {
                     def property = delegate.getProperty(propertyName)
 
                     if (property.multiple) {
-                        result = property.values.collect { getResult(it) }
+                        result = property.values.collect { getResult(delegate.session, it) }
                     } else {
-                        result = getResult(property.value)
+                        result = getResult(delegate.session, property.value)
                     }
                 }
 
@@ -223,7 +224,7 @@ class GroovyExtensionMetaClassRegistry {
         }
     }
 
-    private static def getResult(value) {
+    private static def getResult(Session session, Value value) {
         def result = null
 
         switch (value.type) {
@@ -247,9 +248,24 @@ class GroovyExtensionMetaClassRegistry {
                 break
             case PropertyType.STRING:
                 result = value.string
+                break
+            case PropertyType.REFERENCE:
+                result = getNodeFromValue(session, value)
+                break
+            case PropertyType.WEAKREFERENCE:
+                result = getNodeFromValue(session, value)
+                break
+            case PropertyType.URI:
+                result = value.string
         }
 
         result
+    }
+
+    private static def getNodeFromValue(Session session, Value value) {
+        def uuid = value.string
+
+        uuid ? session.getNodeByIdentifier(uuid) : null
     }
 
     private static void registerPageMetaClass() {

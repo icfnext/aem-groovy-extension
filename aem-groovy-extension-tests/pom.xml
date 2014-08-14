@@ -4,12 +4,12 @@
     <parent>
         <groupId>com.citytechinc.aem.groovy.extension</groupId>
         <artifactId>aem-groovy-extension</artifactId>
-        <version>0.8.1</version>
+        <version>0.8.2</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>aem-groovy-extension-tests</artifactId>
-    <version>0.8.1</version>
+    <version>0.8.2</version>
     <packaging>jar</packaging>
     <name>AEM Groovy Extension Tests</name>
 
