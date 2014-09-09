@@ -1,282 +1,46 @@
 package com.citytechinc.aem.groovy.extension.metaclass
 
-import com.day.cq.wcm.api.Page
-import org.codehaus.groovy.runtime.InvokerHelper
-
 import javax.jcr.Binary
 import javax.jcr.Node
-import javax.jcr.PropertyType
-import javax.jcr.Value
 
-/**
- * Add additional methods to <code>Page</code>, <code>Node</code>, and <code>Binary</code> instances.  Registered
- * metamethods are available for all instances of these classes.
- * <p/>
- * <a href="http://dev.day.com/content/docs/en/cq/current/javadoc/com/day/cq/wcm/api/Page.html">com.day.cq.wcm.api.Page</a>
- *
- * <ul>
- *     <li>iterator() - Allows usage of Groovy closure operators (<code>each</code>,
- *     <code>eachWithIndex</code>) to iterate over child pages of the current page.</li>
- *     <li>recurse(Closure closure) - Recursively invoke this closure on each descendant page of the current page.</li>
- *     <li>getNode() - Get the <code>jcr:content</code> node of the current page, returning null if it does not exist
- *     .</li>
- *     <li>get(String propertyName) - Get the named property value from the <code>jcr:content</code> node of the
- *     current page, with the return type determined dynamically by <a href="http://www.day
- *     .com/maven/jsr170/javadocs/jcr-2.0/javax/jcr/Property.html#getType()" target="_blank">Property.getType()</a>
- *     .</li>
- *     <li>set(String propertyName, Object value) - Set the named property value on the <code>jcr:content</code> node
- *     of the current page.  An array value argument can be used to set multi-valued properties.</li>
- * </ul>
- *
- * <a href="http://www.day.com/maven/jsr170/javadocs/jcr-2.0/javax/jcr/Node.html">javax.jcr.Node</a>
- *
- * <ul>
- *     <li>iterator() - Allows usage of Groovy closure operators (<code>each</code>,
- *     <code>eachWithIndex</code>) to iterate over child nodes of the current node.</li>
- *     <li>get(String propertyName) - Get the named property value, with the return type determined dynamically by <a
- *     href="http://www.day.com/maven/jsr170/javadocs/jcr-2.0/javax/jcr/Property.html#getType()"
- *     target="_blank">Property.getType()</a>.</li>
- *     <li>set(String propertyName, Object value) - Set the named property value.  An array value argument can be
- *     used to set multi-valued properties.</li>
- *     <li>getOrAddNode(String name) - Get the named child node if it exists; otherwise, add it.</li>
- *     <li>getOrAddNode(String name, String primaryNodeTypeName) - Get the named child node if it exists; otherwise,
- *     add it with the given node type.</li>
- *     <li>removeNode(String name) - Remove the child node with the given name,
- *     returning true if the node was removed.</li>
- *     <li>recurse(Closure closure) - Recursively invoke this closure on each descendant node of the current node.</li>
- *     <li>recurse(String primaryNodeTypeName, Closure closure) - Recursively invoke this closure on each descendant
- *     node of the current node that matches the given node type.</li>
- *     <li>recurse(Collection&lt;String&gt; primaryNodeTypeNames, Closure closure) - Recursively invoke this closure
- *     on each descendant node of the current node that matches any of the given node types.</li>
- * </ul>
- *
- * <a href="http://www.day.com/maven/jsr170/javadocs/jcr-2.0/javax/jcr/Binary.html">javax.jcr.Binary</a>
- *
- * <ul>
- *     <li>withBinary(Closure closure) - Execute the closure and automatically dispose of the binary's resources when
- *     the closure completes.  The closure accepts a single argument with the current binary instance.</li>
- * </ul>
- */
+import org.codehaus.groovy.runtime.InvokerHelper
+
+import com.citytechinc.aem.groovy.extension.services.DefaultMetaClassExtensionService
+import com.day.cq.wcm.api.Page
+
 class GroovyExtensionMetaClassRegistry {
 
-    /**
-     * Register metaclasses.
-     */
-    static void registerMetaClasses() {
-        registerBinaryMetaClass()
-        registerNodeMetaClass()
-        registerPageMetaClass()
-    }
+	static Map<Class, Closure> extensions = new DefaultMetaClassExtensionService().getMetaClassExtensions()
 
-    /**
-     * Remove all metaclasses from the registry.
-     */
-    static void removeMetaClasses() {
-        def metaRegistry = InvokerHelper.metaRegistry
+	/**
+	 * Register metaclasses.
+	 */
+	static void registerMetaClasses() {
+		registerBinaryMetaClass()
+		registerNodeMetaClass()
+		registerPageMetaClass()
+	}
 
-        metaRegistry.removeMetaClass(Binary)
-        metaRegistry.removeMetaClass(Node)
-        metaRegistry.removeMetaClass(Page)
-    }
+	/**
+	 * Remove all metaclasses from the registry.
+	 */
+	static void removeMetaClasses() {
+		def metaRegistry = InvokerHelper.metaRegistry
 
-    private static void registerBinaryMetaClass() {
-        Binary.metaClass {
-            withBinary { Closure c ->
-                def result = null
+		metaRegistry.removeMetaClass(Binary)
+		metaRegistry.removeMetaClass(Node)
+		metaRegistry.removeMetaClass(Page)
+	}
 
-                try {
-                    result = c(delegate)
-                } finally {
-                    delegate.dispose()
-                }
+	private static void registerBinaryMetaClass() {
+		extensions[Binary.class].each {Binary.metaClass it}
+	}
 
-                result
-            }
-        }
-    }
+	private static void registerNodeMetaClass() {
+		extensions[Node.class].each {Node.metaClass it}
+	}
 
-    private static void registerNodeMetaClass() {
-        Node.metaClass {
-            iterator {
-                delegate.nodes
-            }
-
-            recurse { Closure closure ->
-                closure(delegate)
-
-                delegate.nodes.each { node ->
-                    node.recurse(closure)
-                }
-            }
-
-            recurse { String primaryNodeTypeName, Closure closure ->
-                if (delegate.primaryNodeType.name == primaryNodeTypeName) {
-                    closure(delegate)
-                }
-
-                delegate.nodes.findAll { it.primaryNodeType.name == primaryNodeTypeName }.each { node ->
-                    node.recurse(primaryNodeTypeName, closure)
-                }
-            }
-
-            recurse { Collection<String> primaryNodeTypeNames, Closure closure ->
-                if (primaryNodeTypeNames.contains(delegate.primaryNodeType.name)) {
-                    closure(delegate)
-                }
-
-                delegate.nodes.findAll { primaryNodeTypeNames.contains(it.primaryNodeType.name) }.each { node ->
-                    node.recurse(primaryNodeTypeNames, closure)
-                }
-            }
-
-            get { String propertyName ->
-                def result = null
-
-                if (delegate.hasProperty(propertyName)) {
-                    def property = delegate.getProperty(propertyName)
-
-                    if (property.multiple) {
-                        result = property.values.collect { getResult(it) }
-                    } else {
-                        result = getResult(property.value)
-                    }
-                }
-
-                result
-            }
-
-            set { String propertyName, value ->
-                if (value == null) {
-                    if (delegate.hasProperty(propertyName)) {
-                        delegate.getProperty(propertyName).remove()
-                    }
-                } else {
-                    def valueFactory = delegate.session.valueFactory
-
-                    if (value instanceof Object[] || value instanceof Collection) {
-                        def values = value.collect { valueFactory.createValue(it) }.toArray(new Value[0])
-
-                        delegate.setProperty(propertyName, values)
-                    } else {
-                        def jcrValue = valueFactory.createValue(value)
-
-                        delegate.setProperty(propertyName, jcrValue)
-                    }
-                }
-            }
-
-            getOrAddNode { String name ->
-                delegate.hasNode(name) ? delegate.getNode(name) : delegate.addNode(name)
-            }
-
-            getOrAddNode { String name, String primaryNodeTypeName ->
-                delegate.hasNode(name) ? delegate.getNode(name) : delegate.addNode(name, primaryNodeTypeName)
-            }
-
-            removeNode { String name ->
-                boolean removed = false
-
-                if (delegate.hasNode(name)) {
-                    delegate.getNode(name).remove()
-                    removed = true
-                }
-
-                removed
-            }
-
-            getNextSibling {
-                def siblings = delegate.parent.nodes
-
-                while (siblings.hasNext()) {
-                    if (delegate.isSame(siblings.nextNode())) {
-                        break
-                    }
-                }
-
-                siblings.hasNext() ? siblings.nextNode() : null
-            }
-
-            getPrevSibling {
-                def siblings = delegate.parent.nodes
-                def prevSibling = null
-                def result = null
-
-                while (siblings.hasNext()) {
-                    def sibling = siblings.nextNode()
-
-                    if (delegate.isSame(sibling)) {
-                        result = prevSibling
-                        break
-                    }
-
-                    prevSibling = sibling
-                }
-
-                result
-            }
-        }
-    }
-
-    private static def getResult(value) {
-        def result = null
-
-        switch (value.type) {
-            case PropertyType.BINARY:
-                result = value.binary
-                break
-            case PropertyType.BOOLEAN:
-                result = value.boolean
-                break
-            case PropertyType.DATE:
-                result = value.date
-                break
-            case PropertyType.DECIMAL:
-                result = value.decimal
-                break
-            case PropertyType.DOUBLE:
-                result = value.double
-                break
-            case PropertyType.LONG:
-                result = value.long
-                break
-            case PropertyType.STRING:
-                result = value.string
-        }
-
-        result
-    }
-
-    private static void registerPageMetaClass() {
-        Page.metaClass {
-            iterator {
-                delegate.listChildren()
-            }
-
-            recurse { Closure closure ->
-                closure(delegate)
-
-                delegate.listChildren().each { child ->
-                    child.recurse(closure)
-                }
-            }
-
-            getNode {
-                delegate.contentResource?.adaptTo(Node)
-            }
-
-            get { String name ->
-                def node = delegate.contentResource?.adaptTo(Node)
-
-                node?.get(name)
-            }
-
-            set { String name, value ->
-                def node = delegate.contentResource?.adaptTo(Node)
-
-                if (node) {
-                    node.set(name, value)
-                }
-            }
-        }
-    }
+	private static void registerPageMetaClass() {
+		extensions[Page.class].each {Page.metaClass it}
+	}
 }

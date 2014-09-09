@@ -12,7 +12,7 @@
     <groupId>com.citytechinc.aem.groovy.extension</groupId>
     <artifactId>aem-groovy-extension</artifactId>
     <packaging>pom</packaging>
-    <version>0.7.0</version>
+    <version>0.7.1-SNAPSHOT</version>
     <name>AEM Groovy Extension</name>
     <description>OSGi bundle containing Groovy builders and metaclasses for AEM (Adobe CQ).</description>
 
@@ -232,8 +232,24 @@
             <artifactId>jcr</artifactId>
         </dependency>
         <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.apache.sling</groupId>
             <artifactId>org.apache.sling.api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.day.cq</groupId>
+            <artifactId>cq-commons</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.day.cq</groupId>
+            <artifactId>cq-search</artifactId>
         </dependency>
         <dependency>
             <groupId>com.day.cq</groupId>
@@ -242,10 +258,6 @@
         <dependency>
             <groupId>com.day.cq.wcm</groupId>
             <artifactId>cq-wcm-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.day.cq</groupId>
-            <artifactId>cq-commons</artifactId>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
