@@ -8,6 +8,9 @@ import javax.jcr.Node
 import javax.jcr.PropertyType
 import javax.jcr.Session
 import javax.jcr.Value
+import javax.servlet.ServletRequest
+import javax.servlet.jsp.JspContext
+import javax.servlet.jsp.tagext.TagSupport
 
 /**
  * Add additional methods to <code>Page</code>, <code>Node</code>, and <code>Binary</code> instances.  Registered
@@ -78,6 +81,43 @@ class GroovyExtensionMetaClassRegistry {
         metaRegistry.removeMetaClass(Binary)
         metaRegistry.removeMetaClass(Node)
         metaRegistry.removeMetaClass(Page)
+    }
+
+    private static void registerJspContextMetaClass() {
+        JspContext.metaClass {
+            getAt { String attributeName ->
+                delegate.getAttribute(attributeName)
+            }
+
+            putAt { String attributeName, Object value ->
+                delegate.setAttribute(attributeName, value)
+            }
+        }
+    }
+
+    private static void registerServletRequestMetaClass() {
+        ServletRequest.metaClass {
+            getAt { String parameterName ->
+                def value = delegate.parameterMap[parameterName] as String[]
+                def result
+
+                if (value) {
+                    result = value.length > 1 ? value as List : value[0]
+                } else {
+                    result = null
+                }
+
+                result
+            }
+        }
+    }
+
+    private static void registerTagSupportMetaClass() {
+        TagSupport.metaClass {
+            write { String output ->
+                delegate.out.write(output)
+            }
+        }
     }
 
     private static void registerBinaryMetaClass() {

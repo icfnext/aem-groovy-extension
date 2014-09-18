@@ -18,6 +18,10 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
         }
     }
 
+    def cleanup() {
+        removeAllNodes()
+    }
+
     def "iterator"() {
         setup:
         def node = getNode("/test")

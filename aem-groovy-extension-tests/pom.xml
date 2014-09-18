@@ -17,10 +17,6 @@
         <testSourceDirectory>src/test/groovy</testSourceDirectory>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.groovy</groupId>
-                <artifactId>groovy-eclipse-compiler</artifactId>
-            </plugin>
-            <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
             </plugin>
             <plugin>
@@ -76,7 +72,7 @@
         <dependency>
             <groupId>com.citytechinc.aem.prosper</groupId>
             <artifactId>prosper</artifactId>
-            <version>0.11.1</version>
+            <version>1.0.0</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
