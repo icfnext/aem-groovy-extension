@@ -15,7 +15,6 @@
 
     <properties>
         <maven.test.skip>true</maven.test.skip>
-
     </properties>
 
     <build>
@@ -57,6 +56,7 @@
                 <version>2.4</version>
                 <configuration>
                     <appendAssemblyId>false</appendAssemblyId>
+                    <finalName>${project.parent.build.finalName}</finalName>
                     <descriptors>
                         <descriptor>src/main/assembly/zip.xml</descriptor>
                     </descriptors>
@@ -83,6 +83,7 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <fileName>${project.build.directory}/${project.parent.build.finalName}.zip</fileName>
                     <host>${aem.host}</host>
                     <port>${aem.port.author}</port>
                     <contextPath>${aem.context.path}</contextPath>

@@ -85,7 +85,7 @@
                 </property>
             </activation>
             <properties>
-                <aem.package.skip>true</aem.package.skip>
+                <aem.package.skip>false</aem.package.skip>
                 <aem.host>localhost</aem.host>
                 <aem.port.author>4502</aem.port.author>
                 <aem.port.publish>4503</aem.port.publish>
