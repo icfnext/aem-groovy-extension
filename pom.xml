@@ -68,9 +68,44 @@
         <maven.junit.usefile>false</maven.junit.usefile>
         <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss.SSSZ</maven.build.timestamp.format>
         <timestamp>${maven.build.timestamp}</timestamp>
+        <aem.package.skip>true</aem.package.skip>
+        <aem.package.goal>install</aem.package.goal>
+        <aem.username>admin</aem.username>
+        <aem.context.path></aem.context.path>
+        <osgi.bundle.status.skip.author>true</osgi.bundle.status.skip.author>
+        <osgi.bundle.status.skip.publish>true</osgi.bundle.status.skip.publish>
     </properties>
 
     <profiles>
+        <profile>
+            <id>local</id>
+            <activation>
+                <property>
+                    <name>local</name>
+                </property>
+            </activation>
+            <properties>
+                <aem.package.skip>true</aem.package.skip>
+                <aem.host>localhost</aem.host>
+                <aem.port.author>4502</aem.port.author>
+                <aem.port.publish>4503</aem.port.publish>
+                <aem.username>admin</aem.username>
+                <aem.password>admin</aem.password>
+                <osgi.bundle.status.skip.author>false</osgi.bundle.status.skip.author>
+            </properties>
+        </profile>
+        <profile>
+            <id>replicate</id>
+            <activation>
+                <property>
+                    <name>replicate</name>
+                </property>
+            </activation>
+            <properties>
+                <aem.package.goal>replicate</aem.package.goal>
+                <osgi.bundle.status.skip.publish>false</osgi.bundle.status.skip.publish>
+            </properties>
+        </profile>
         <profile>
             <id>github-site</id>
             <activation>
@@ -83,7 +118,7 @@
                     <plugin>
                         <groupId>com.github.github</groupId>
                         <artifactId>site-maven-plugin</artifactId>
-                        <version>0.9</version>
+                        <version>0.10</version>
                         <configuration>
                             <message>site for ${project.version}</message>
                             <server>github</server>
