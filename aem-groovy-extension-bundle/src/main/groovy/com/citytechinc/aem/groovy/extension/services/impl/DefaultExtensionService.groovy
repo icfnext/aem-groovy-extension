@@ -20,11 +20,17 @@ class DefaultExtensionService implements ExtensionService {
     List<MetaClassExtensionService> metaClassExtensions = []
 
     @Override
-    List<Class> getMetaClasses() {
-        metaClassExtensions*.class
+    Set<Class> getMetaClasses() {
+        def metaClasses = [] as LinkedHashSet
+
+        metaClassExtensions.each {
+            metaClasses.addAll(it.metaClasses.keySet())
+        }
+
+        metaClasses
     }
 
-    void bindMetaClassExtensions(MetaClassExtensionService extension) {
+    void bindMetaClassExtensionService(MetaClassExtensionService extension) {
         metaClassExtensions.add(extension)
 
         extension.metaClasses.each { clazz, metaClassClosure ->
@@ -32,7 +38,7 @@ class DefaultExtensionService implements ExtensionService {
         }
     }
 
-    void unbindMetaClassExtensions(MetaClassExtensionService extension) {
+    void unbindMetaClassExtensionService(MetaClassExtensionService extension) {
         metaClassExtensions.remove(extension)
 
         // remove metaclass from registry for each mapped class
