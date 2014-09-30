@@ -12,7 +12,7 @@
     <groupId>com.citytechinc.aem.groovy.extension</groupId>
     <artifactId>aem-groovy-extension</artifactId>
     <packaging>pom</packaging>
-    <version>0.9.0-SNAPSHOT</version>
+    <version>0.7.1-SNAPSHOT</version>
     <name>AEM Groovy Extension</name>
     <description>OSGi bundle containing Groovy builders and metaclasses for AEM (Adobe CQ).</description>
 
