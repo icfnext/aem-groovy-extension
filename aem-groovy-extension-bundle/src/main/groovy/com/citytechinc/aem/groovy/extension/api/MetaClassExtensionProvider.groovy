@@ -3,7 +3,7 @@ package com.citytechinc.aem.groovy.extension.api
 /**
  *
  */
-interface MetaClassExtensionService {
+interface MetaClassExtensionProvider {
 
     /**
      * @return map of classes and their associated metaclass closure

@@ -1,6 +1,6 @@
 package com.citytechinc.aem.groovy.extension.services.impl
 
-import com.citytechinc.aem.groovy.extension.api.MetaClassExtensionService
+import com.citytechinc.aem.groovy.extension.api.MetaClassExtensionProvider
 import com.day.cq.wcm.api.Page
 import org.apache.felix.scr.annotations.Component
 import org.apache.felix.scr.annotations.Service
@@ -63,7 +63,7 @@ import javax.jcr.Value
  */
 @Service
 @Component(immediate = true)
-class DefaultMetaClassExtensionService implements MetaClassExtensionService {
+class DefaultMetaClassExtensionProvider implements MetaClassExtensionProvider {
 
     static def BINARY_METACLASS = {
         withBinary { Closure c ->

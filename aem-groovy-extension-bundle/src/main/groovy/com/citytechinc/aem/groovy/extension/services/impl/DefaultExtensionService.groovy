@@ -1,7 +1,7 @@
 package com.citytechinc.aem.groovy.extension.services.impl
 
-import com.citytechinc.aem.groovy.extension.api.ExtensionService
-import com.citytechinc.aem.groovy.extension.api.MetaClassExtensionService
+import com.citytechinc.aem.groovy.extension.api.MetaClassExtensionProvider
+import com.citytechinc.aem.groovy.extension.services.ExtensionService
 import groovy.util.logging.Slf4j
 import org.apache.felix.scr.annotations.Component
 import org.apache.felix.scr.annotations.Reference
@@ -16,8 +16,8 @@ import org.codehaus.groovy.runtime.InvokerHelper
 class DefaultExtensionService implements ExtensionService {
 
     @Reference(cardinality = ReferenceCardinality.OPTIONAL_MULTIPLE,
-        referenceInterface = MetaClassExtensionService, policy = ReferencePolicy.DYNAMIC)
-    List<MetaClassExtensionService> metaClassExtensions = []
+        referenceInterface = MetaClassExtensionProvider, policy = ReferencePolicy.DYNAMIC)
+    List<MetaClassExtensionProvider> metaClassExtensions = []
 
     @Override
     Set<Class> getMetaClasses() {
@@ -30,7 +30,7 @@ class DefaultExtensionService implements ExtensionService {
         metaClasses
     }
 
-    void bindMetaClassExtensionService(MetaClassExtensionService extension) {
+    void bindMetaClassExtensions(MetaClassExtensionProvider extension) {
         metaClassExtensions.add(extension)
 
         extension.metaClasses.each { clazz, metaClassClosure ->
@@ -38,7 +38,7 @@ class DefaultExtensionService implements ExtensionService {
         }
     }
 
-    void unbindMetaClassExtensionService(MetaClassExtensionService extension) {
+    void unbindMetaClassExtensions(MetaClassExtensionProvider extension) {
         metaClassExtensions.remove(extension)
 
         // remove metaclass from registry for each mapped class

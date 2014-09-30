@@ -1,10 +1,13 @@
-package com.citytechinc.aem.groovy.extension.metaclass
+package com.citytechinc.aem.groovy.extension.services.impl
 
 import com.citytechinc.aem.groovy.extension.GroovyExtensionSpec
+import com.day.cq.wcm.api.NameConstants
 import spock.lang.Unroll
 
+import javax.jcr.Binary
+
 @Unroll
-class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
+class DefaultMetaClassExtensionProviderSpec extends GroovyExtensionSpec {
 
     def setup() {
         nodeBuilder.test {
@@ -16,9 +19,39 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
             child2("sling:Folder", ["singleValuedProperty": "1"])
             child3("sling:Folder", ["multiValuedProperty": ["1", "2"].toArray(new String[0])])
         }
+
+        pageBuilder.content {
+            citytechinc("CITYTECH, Inc.") {
+                "jcr:content"("sling:resourceType": "foundation/components/page") {
+                    mainpar("sling:resourceType": "foundation/components/parsys")
+                }
+                news()
+                company {
+                    people()
+                    places()
+                }
+            }
+        }
+
+        nodeBuilder.content {
+            empty(NameConstants.NT_PAGE)
+        }
     }
 
-    def "iterator"() {
+    def "binary: execute closure and dispose binary"() {
+        setup:
+        def binary = Mock(Binary)
+
+        when:
+        binary.withBinary {
+
+        }
+
+        then:
+        1 * binary.dispose()
+    }
+
+    def "node: iterator"() {
         setup:
         def node = getNode("/test")
 
@@ -27,7 +60,7 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
         node*.name == ["child1", "child2", "child3"]
     }
 
-    def "recurse"() {
+    def "node: recurse"() {
         setup:
         def node = getNode("/test")
         def names = []
@@ -40,7 +73,7 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
         names == ["test", "child1", "sub", "subsub", "child2", "child3"]
     }
 
-    def "recurse with type"() {
+    def "node: recurse with type"() {
         setup:
         def node = getNode("/test")
         def names = []
@@ -53,7 +86,7 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
         names == ["child1", "sub", "subsub"]
     }
 
-    def "recurse with types"() {
+    def "node: recurse with types"() {
         setup:
         def node = getNode("/test")
         def types = ["nt:folder", "sling:Folder"]
@@ -67,7 +100,7 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
         names == ["child1", "sub", "subsub", "child2", "child3"]
     }
 
-    def "get"() {
+    def "node: get"() {
         setup:
         def node = getNode("/test/child2")
 
@@ -75,7 +108,7 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
         node.get("singleValuedProperty") == "1"
     }
 
-    def "get multiple"() {
+    def "node: get multiple"() {
         setup:
         def node = getNode("/test/child3")
 
@@ -83,7 +116,7 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
         node.get("multiValuedProperty") == ["1", "2"]
     }
 
-    def "set"() {
+    def "node: set"() {
         setup:
         def node = getNode("/test/child3")
 
@@ -97,7 +130,7 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
         value << [true, Calendar.instance, BigDecimal.ZERO, Double.valueOf(0.0), Long.valueOf(0), "foo"]
     }
 
-    def "set null"() {
+    def "node: set null"() {
         setup:
         def node = getNode("/test/child3")
 
@@ -108,9 +141,9 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
         !node.hasProperty("testProperty")
     }
 
-    def "set binary"() {
+    def "node: set binary"() {
         setup:
-        def binary
+        def binary = null
 
         this.class.getResourceAsStream("/file").withStream { stream ->
             binary = session.valueFactory.createBinary(stream)
@@ -125,7 +158,7 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
         node.get("testProperty").stream.text == this.class.getResourceAsStream("/file").text
     }
 
-    def "set multiple"() {
+    def "node: set multiple"() {
         setup:
         def node = getNode("/test/child3")
 
@@ -139,7 +172,7 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
         value << [["one", "two"], ["one", "two", "three"].toArray()]
     }
 
-    def "get or add node"() {
+    def "node: get or add node"() {
         setup:
         def node = getNode("/test")
 
@@ -155,7 +188,7 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
         "child4"     | "/test/child4"
     }
 
-    def "get or add node with type"() {
+    def "node: get or add node with type"() {
         setup:
         def node = getNode("/test")
 
@@ -171,7 +204,7 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
         "child4"     | "sling:Folder" | "/test/child4"
     }
 
-    def "remove existing node"() {
+    def "node: emove existing node"() {
         setup:
         def node = getNode("/test")
 
@@ -180,7 +213,7 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
         !session.nodeExists("/test/child1")
     }
 
-    def "remove non-existent node"() {
+    def "node: remove non-existent node"() {
         setup:
         def node = getNode("/test")
 
@@ -188,7 +221,7 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
         !node.removeNode("child4")
     }
 
-    def "get next sibling"() {
+    def "node: get next sibling"() {
         setup:
         def child = getNode(childPath)
 
@@ -204,7 +237,7 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
         "/test/child2" | "/test/child3"
     }
 
-    def "get next sibling with last sibling"() {
+    def "node: get next sibling with last sibling"() {
         setup:
         def child = getNode("/test/child3")
 
@@ -212,7 +245,7 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
         !child.nextSibling
     }
 
-    def "get prev sibling"() {
+    def "node: get prev sibling"() {
         setup:
         def child = getNode(childPath)
 
@@ -228,11 +261,89 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
         "/test/child3" | "/test/child2"
     }
 
-    def "get prev sibling with first sibling"() {
+    def "node: get prev sibling with first sibling"() {
         setup:
         def child = getNode("/test/child1")
 
         expect:
         !child.prevSibling
-	}
+    }
+
+    def "page: iterator"() {
+        setup:
+        def page = getPage("/content/citytechinc")
+
+        expect:
+        page.iterator().size() == 2
+        page*.name == ["news", "company"]
+    }
+
+    def "page: recurse"() {
+        setup:
+        def page = getPage("/content/citytechinc")
+        def names = []
+
+        page.recurse {
+            names.add(it.name)
+        }
+
+        expect:
+        names == ["citytechinc", "news", "company", "people", "places"]
+    }
+
+    def "page: get node"() {
+        setup:
+        def page = getPage("/content/citytechinc")
+
+        expect:
+        page.node.path == "/content/citytechinc/jcr:content"
+    }
+
+    def "page: get node for page with no content"() {
+        setup:
+        def page = getPage("/content/empty")
+
+        expect:
+        !page.node
+    }
+
+    def "page: get"() {
+        setup:
+        def page = getPage("/content/citytechinc")
+
+        expect:
+        page.get(propertyName) == propertyValue
+
+        where:
+        propertyName          | propertyValue
+        "sling:resourceType"  | "foundation/components/page"
+        "nonExistentProperty" | null
+    }
+
+    def "page: set"() {
+        setup:
+        def page = getPage("/content/citytechinc")
+
+        when:
+        page.set(propertyName, propertyValue)
+
+        then:
+        page.get(propertyName) == propertyValue
+
+        where:
+        propertyName              | propertyValue
+        "sling:resourceSuperType" | "foundation/components/parbase"
+        "nonExistentProperty"     | null
+    }
+
+    def "page: set for page with no content"() {
+        setup:
+        def page = getPage("/content/empty")
+
+        when:
+        page.set("foo", "bar")
+
+        then:
+        notThrown(NullPointerException)
+    }
 }

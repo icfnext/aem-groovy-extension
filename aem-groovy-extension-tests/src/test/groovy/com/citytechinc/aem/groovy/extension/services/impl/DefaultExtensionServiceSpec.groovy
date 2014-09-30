@@ -1,6 +1,6 @@
 package com.citytechinc.aem.groovy.extension.services.impl
 
-import com.citytechinc.aem.groovy.extension.api.MetaClassExtensionService
+import com.citytechinc.aem.groovy.extension.api.MetaClassExtensionProvider
 import com.citytechinc.aem.prosper.specs.ProsperSpec
 import com.day.cq.wcm.api.Page
 import spock.lang.Unroll
@@ -11,7 +11,7 @@ import javax.jcr.Node
 @Unroll
 class DefaultExtensionServiceSpec extends ProsperSpec {
 
-    class TestMetaClassExtensionService implements MetaClassExtensionService {
+    class TestMetaClassExtensionProvider implements MetaClassExtensionProvider {
 
         @Override
         Map<Class, Closure> getMetaClasses() {
@@ -24,16 +24,16 @@ class DefaultExtensionServiceSpec extends ProsperSpec {
         def extensionService = new DefaultExtensionService()
 
         extensions.each {
-            extensionService.bindMetaClassExtensionService(it)
+            extensionService.bindMetaClassExtensions(it)
         }
 
         expect:
         extensionService.metaClasses == classes as LinkedHashSet
 
         where:
-        extensions                                                                    | classes
-        []                                                                            | []
-        [new DefaultMetaClassExtensionService()]                                      | [Binary, Node, Page]
-        [new DefaultMetaClassExtensionService(), new TestMetaClassExtensionService()] | [Binary, Node, Page, String, Integer]
+        extensions                                                                      | classes
+        []                                                                              | []
+        [new DefaultMetaClassExtensionProvider()]                                       | [Binary, Node, Page]
+        [new DefaultMetaClassExtensionProvider(), new TestMetaClassExtensionProvider()] | [Binary, Node, Page, String, Integer]
     }
 }
