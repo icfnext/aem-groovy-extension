@@ -17,29 +17,35 @@ class DefaultExtensionService implements ExtensionService {
 
     @Reference(cardinality = ReferenceCardinality.OPTIONAL_MULTIPLE,
         referenceInterface = MetaClassExtensionProvider, policy = ReferencePolicy.DYNAMIC)
-    List<MetaClassExtensionProvider> metaClassExtensions = []
+    List<MetaClassExtensionProvider> metaClassExtensionProviders = []
 
     @Override
     Set<Class> getMetaClasses() {
         def metaClasses = [] as LinkedHashSet
 
-        metaClassExtensions.each {
+        metaClassExtensionProviders.each {
             metaClasses.addAll(it.metaClasses.keySet())
         }
 
         metaClasses
     }
 
-    void bindMetaClassExtensions(MetaClassExtensionProvider extension) {
-        metaClassExtensions.add(extension)
+    void bindMetaClassExtensionProvider(MetaClassExtensionProvider extension) {
+        metaClassExtensionProviders.add(extension)
+
+        LOG.info "added metaclass extension provider = {}", extension.class.name
 
         extension.metaClasses.each { clazz, metaClassClosure ->
             clazz.metaClass(metaClassClosure)
+
+            LOG.info "added metaclass for class = {}", clazz.name
         }
     }
 
-    void unbindMetaClassExtensions(MetaClassExtensionProvider extension) {
-        metaClassExtensions.remove(extension)
+    void unbindMetaClassExtensionProvider(MetaClassExtensionProvider extension) {
+        metaClassExtensionProviders.remove(extension)
+
+        LOG.info "removed metaclass extension provider = {}", extension.class.name
 
         // remove metaclass from registry for each mapped class
         extension.metaClasses.each { clazz, closure ->
@@ -48,7 +54,7 @@ class DefaultExtensionService implements ExtensionService {
             LOG.info "removed metaclass for class = {}", clazz.name
 
             // ensure that valid metaclasses are still registered
-            metaClassExtensions.each {
+            metaClassExtensionProviders.each {
                 def metaClassClosure = it.metaClasses[clazz]
 
                 if (metaClassClosure) {

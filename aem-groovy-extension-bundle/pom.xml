@@ -120,7 +120,7 @@
                 <configuration>
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-                        <Export-Package>com.citytechinc.aem.groovy.extension.*</Export-Package>
+                        <Export-Package>!*.impl,com.citytechinc.aem.groovy.extension.*</Export-Package>
                         <DynamicImport-Package>*</DynamicImport-Package>
                     </instructions>
                 </configuration>

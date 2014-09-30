@@ -2,6 +2,7 @@ package com.citytechinc.aem.groovy.extension.services.impl
 
 import com.citytechinc.aem.groovy.extension.api.MetaClassExtensionProvider
 import com.day.cq.wcm.api.Page
+import groovy.util.logging.Slf4j
 import org.apache.felix.scr.annotations.Component
 import org.apache.felix.scr.annotations.Service
 
@@ -61,8 +62,9 @@ import javax.jcr.Value
  *     the closure completes.  The closure accepts a single argument with the current binary instance.</li>
  * </ul>
  */
-@Service
+@Service(MetaClassExtensionProvider)
 @Component(immediate = true)
+@Slf4j("LOG")
 class DefaultMetaClassExtensionProvider implements MetaClassExtensionProvider {
 
     static def BINARY_METACLASS = {
@@ -239,9 +241,7 @@ class DefaultMetaClassExtensionProvider implements MetaClassExtensionProvider {
 
     @Override
     Map<Class, Closure> getMetaClasses() {
-        [(Binary): BINARY_METACLASS,
-            (Node): NODE_METACLASS,
-            (Page): PAGE_METACLASS]
+        [(Binary): BINARY_METACLASS, (Node): NODE_METACLASS, (Page): PAGE_METACLASS]
     }
 
     private static def getResult(Session session, Value value) {

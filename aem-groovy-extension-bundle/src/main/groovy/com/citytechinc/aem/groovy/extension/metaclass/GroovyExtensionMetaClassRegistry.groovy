@@ -8,12 +8,15 @@ import org.codehaus.groovy.runtime.InvokerHelper
  */
 class GroovyExtensionMetaClassRegistry {
 
-    static final Map<Class, Closure> EXTENSIONS = new DefaultMetaClassExtensionProvider().metaClasses
+    private static final Map<Class, Closure> EXTENSIONS = new DefaultMetaClassExtensionProvider().metaClasses
 
     /**
      * Register metaclasses.
      */
     static void registerMetaClasses() {
+        // remove any existing metaclasses
+        removeMetaClasses()
+
         EXTENSIONS.each { clazz, closure ->
             clazz.metaClass(closure)
         }
