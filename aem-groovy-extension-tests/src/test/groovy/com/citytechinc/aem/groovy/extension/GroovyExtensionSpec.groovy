@@ -8,8 +8,4 @@ abstract class GroovyExtensionSpec extends ProsperSpec {
     def setupSpec() {
         GroovyExtensionMetaClassRegistry.registerMetaClasses()
     }
-
-    def cleanup() {
-        removeAllNodes()
-    }
 }

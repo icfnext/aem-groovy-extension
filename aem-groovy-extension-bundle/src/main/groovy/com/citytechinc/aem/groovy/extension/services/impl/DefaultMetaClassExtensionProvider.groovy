@@ -43,6 +43,7 @@ import javax.jcr.Value
  *     target="_blank">Property.getType()</a>.</li>
  *     <li>set(String propertyName, Object value) - Set the named property value.  An array value argument can be
  *     used to set multi-valued properties.</li>
+ *     <li>set(Map properties) - Set properties using the key/value pairs in the map as the property names/values.</li>
  *     <li>getOrAddNode(String name) - Get the named child node if it exists; otherwise, add it.</li>
  *     <li>getOrAddNode(String name, String primaryNodeTypeName) - Get the named child node if it exists; otherwise,
  *     add it with the given node type.</li>
