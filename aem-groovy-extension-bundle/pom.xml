@@ -143,7 +143,6 @@
                                     />
                                 <groovydoc destdir="${project.reporting.outputDirectory}/groovydocs"
                                            sourcepath="${basedir}/src/main/groovy"
-                                           packagenames="com.citytechinc.aem.groovy.extension.builders.*,com.citytechinc.aem.groovy.extension.metaclass.*"
                                            use="true"
                                            windowtitle="${project.name}"
                                            doctitle="${project.name}"
