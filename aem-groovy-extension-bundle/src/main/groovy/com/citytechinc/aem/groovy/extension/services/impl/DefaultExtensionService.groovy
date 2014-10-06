@@ -10,6 +10,10 @@ import org.apache.felix.scr.annotations.ReferencePolicy
 import org.apache.felix.scr.annotations.Service
 import org.codehaus.groovy.runtime.InvokerHelper
 
+/**
+ * This default extension service exposes the set of registered metaclasses while providing for the binding and
+ * unbinding of metaclass providers.
+ */
 @Service(ExtensionService)
 @Component(immediate = true)
 @Slf4j("LOG")

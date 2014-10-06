@@ -2,15 +2,13 @@ package com.citytechinc.aem.groovy.extension.services.impl
 
 import com.citytechinc.aem.groovy.extension.api.MetaClassExtensionProvider
 import com.citytechinc.aem.prosper.specs.ProsperSpec
-import com.day.cq.wcm.api.Page
 import org.codehaus.groovy.runtime.InvokerHelper
 import spock.lang.Unroll
 
-import javax.jcr.Binary
-import javax.jcr.Node
-
 @Unroll
 class DefaultExtensionServiceSpec extends ProsperSpec {
+
+    static final def DEFAULT_METACLASSES = new DefaultMetaClassExtensionProvider().metaClasses.keySet() as List
 
     class StringMetaClassExtensionProvider implements MetaClassExtensionProvider {
 
@@ -50,8 +48,8 @@ class DefaultExtensionServiceSpec extends ProsperSpec {
         where:
         extensions                                                                        | classes
         []                                                                                | []
-        [new DefaultMetaClassExtensionProvider()]                                         | [Binary, Node, Page]
-        [new DefaultMetaClassExtensionProvider(), new StringMetaClassExtensionProvider()] | [Binary, Node, Page, String]
+        [new DefaultMetaClassExtensionProvider()]                                         | DEFAULT_METACLASSES
+        [new DefaultMetaClassExtensionProvider(), new StringMetaClassExtensionProvider()] | DEFAULT_METACLASSES + (String)
     }
 
     def "metaclass is registered after binding extension provider"() {

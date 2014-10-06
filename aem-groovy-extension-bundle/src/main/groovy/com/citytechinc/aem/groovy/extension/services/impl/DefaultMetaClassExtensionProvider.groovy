@@ -11,10 +11,11 @@ import javax.jcr.Node
 import javax.jcr.PropertyType
 import javax.jcr.Session
 import javax.jcr.Value
+import javax.servlet.ServletRequest
+import javax.servlet.jsp.JspContext
 
 /**
- * Add additional methods to <code>Page</code>, <code>Node</code>, and <code>Binary</code> instances.  Registered
- * metamethods are available for all instances of these classes.
+ * This default metaclass provider adds additional methods to all instances of the classes outlined below.
  * <p/>
  * <a href="http://dev.day.com/content/docs/en/cq/current/javadoc/com/day/cq/wcm/api/Page.html">com.day.cq.wcm.api
  * .Page</a>
@@ -62,11 +63,49 @@ import javax.jcr.Value
  *     <li>withBinary(Closure closure) - Execute the closure and automatically dispose of the binary's resources when
  *     the closure completes.  The closure accepts a single argument with the current binary instance.</li>
  * </ul>
+ *
+ * <a href="http://docs.oracle.com/javaee/6/api/javax/servlet/jsp/JspContext.html">javax.servlet.jsp.JspContext</a>
+ *
+ * <ul>
+ *     <li>getAt(String name) - Supports use of the <a href="http://groovy.codehaus.org/Operators#Operators-OtherOperators">subscript operator</a> to get an attribute value.</li>
+ *     <li>putAt(String name, Object value) - Supports use of the <a href="http://groovy.codehaus.org/Operators#Operators-OtherOperators">subscript operator</a> to set an attribute value.</li>
+ * </ul>
+ *
+ * <a href="http://docs.oracle.com/javaee/6/api/javax/servlet/ServletRequest.html">javax.servlet.ServletRequest</a>
+ *
+ * <ul>
+ *     <li>getAt(String name) - Supports use of the <a href="http://groovy.codehaus.org/Operators#Operators-OtherOperators">subscript operator</a> to get a request parameter value.  If the value is an array, a list will be returned.</li>
+ * </ul>
  */
 @Service(MetaClassExtensionProvider)
 @Component(immediate = true)
 @Slf4j("LOG")
 class DefaultMetaClassExtensionProvider implements MetaClassExtensionProvider {
+
+    static def JSP_CONTEXT_METACLASS = {
+        getAt { String attributeName ->
+            delegate.getAttribute(attributeName)
+        }
+
+        putAt { String attributeName, Object value ->
+            delegate.setAttribute(attributeName, value)
+        }
+    }
+
+    static def SERVLET_REQUEST_METACLASS = {
+        getAt { String parameterName ->
+            def value = delegate.parameterMap[parameterName] as String[]
+            def result
+
+            if (value) {
+                result = value.length > 1 ? value as List : value[0]
+            } else {
+                result = null
+            }
+
+            result
+        }
+    }
 
     static def BINARY_METACLASS = {
         withBinary { Closure c ->
@@ -242,7 +281,11 @@ class DefaultMetaClassExtensionProvider implements MetaClassExtensionProvider {
 
     @Override
     Map<Class, Closure> getMetaClasses() {
-        [(Binary): BINARY_METACLASS, (Node): NODE_METACLASS, (Page): PAGE_METACLASS]
+        [(JspContext)    : JSP_CONTEXT_METACLASS,
+         (ServletRequest): SERVLET_REQUEST_METACLASS,
+         (Binary)        : BINARY_METACLASS,
+         (Node)          : NODE_METACLASS,
+         (Page)          : PAGE_METACLASS]
     }
 
     private static def getResult(Session session, Value value) {
