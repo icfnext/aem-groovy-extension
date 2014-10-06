@@ -4,7 +4,7 @@
 
 ## Overview
 
-OSGi bundle containing Groovy builders and metaclasses for AEM (Adobe CQ).
+OSGi bundle containing Groovy builders and metaclasses for AEM (Adobe CQ).  The bundle exposes an API to implement extension "provider" services to register additional Groovy metaclasses in the container.
 
 ```groovy
 new NodeBuilder(session).content {
@@ -16,24 +16,46 @@ new NodeBuilder(session).content {
 }
 ```
 
-## Usage
+## Requirements
+
+* AEM 6.0  running on localhost:4502 (versions 0.8.x and above)
+* Versions 0.7.x and below are compatible with CQ 5.6
+* [Maven](http://maven.apache.org/) 3.x
+
+## Usage and Installation
 
 1. Add dependency to your project's Maven `pom.xml`.
 
         <dependency>
             <groupId>com.citytechinc.aem.groovy.extension</groupId>
             <artifactId>aem-groovy-extension-bundle</artifactId>
-            <version>0.6.2</version>
+            <version>0.9.0</version>
             <scope>provided</scope>
         </dependency>
 
-2. Install Groovy and extension OSGi bundles from the command line.
+2. Install the AEM Groovy Extension package.
 
-        mvn install -P install-bundles
+        mvn install -P local
+        
+    or
+        
+        mvn install -P local,replicate
+        
+    The optional `replicate` profile activates the deployed package to the local publish instance.
 
-    To install to a non-localhost AEM environment, connection parameters can be passed as Maven properties on the command line (see bundle `pom.xml` for additional environment property names).
+    To install to a non-localhost AEM environment, connection parameters can be passed as Maven properties on the command line (see the parent POM file for additional environment property names).
 
-        mvn install -P install-bundles -Daem.host=hostname -Daem.port=7402
+        mvn install -P local -Daem.host=hostname -Daem.port.author=7402
+        
+## Context Path Support
+
+If you are running AEM with a context path, set the Maven property `aem.context.path` during installation.
+
+    mvn install -P local -Daem.context.path=/context
+        
+## Registering Additional Metaclasses
+
+Services implementing the `com.citytechinc.aem.groovy.extension.api.MetaClassExtensionProvider` will be automatically discovered and bound by the OSGi container.  These services can be implemented in any deployed bundle.  The AEM Groovy Extension bundle will handle the registration and removal of supplied metaclasses as these services are activated/deactivated in the container.  See the `DefaultMetaClassExtensionProvider` service for the proper closure syntax for registering metaclasses.
 
 ## Versioning
 
