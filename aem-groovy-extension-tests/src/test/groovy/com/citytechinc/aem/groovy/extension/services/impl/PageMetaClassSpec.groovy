@@ -1,13 +1,13 @@
-package com.citytechinc.aem.groovy.extension.metaclass
+package com.citytechinc.aem.groovy.extension.services.impl
 
 import com.citytechinc.aem.groovy.extension.GroovyExtensionSpec
 import com.day.cq.wcm.api.NameConstants
 import spock.lang.Unroll
 
 @Unroll
-class PageMetaClassRegistrySpec extends GroovyExtensionSpec {
+class PageMetaClassSpec extends GroovyExtensionSpec {
 
-    def setup() {
+    def setupSpec() {
         pageBuilder.content {
             citytechinc("CITYTECH, Inc.") {
                 "jcr:content"("sling:resourceType": "foundation/components/page") {
@@ -19,6 +19,10 @@ class PageMetaClassRegistrySpec extends GroovyExtensionSpec {
                     places()
                 }
             }
+        }
+
+        nodeBuilder.content {
+            empty(NameConstants.NT_PAGE)
         }
     }
 
@@ -54,9 +58,6 @@ class PageMetaClassRegistrySpec extends GroovyExtensionSpec {
 
     def "get node for page with no content"() {
         setup:
-        getNode("/content").addNode("empty", NameConstants.NT_PAGE)
-        session.save()
-
         def page = getPage("/content/empty")
 
         expect:
@@ -94,9 +95,6 @@ class PageMetaClassRegistrySpec extends GroovyExtensionSpec {
 
     def "set for page with no content"() {
         setup:
-        getNode("/content").addNode("empty", NameConstants.NT_PAGE)
-        session.save()
-
         def page = getPage("/content/empty")
 
         when:

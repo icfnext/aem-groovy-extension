@@ -1,10 +1,10 @@
-package com.citytechinc.aem.groovy.extension.metaclass
+package com.citytechinc.aem.groovy.extension.services.impl
 
 import com.citytechinc.aem.groovy.extension.GroovyExtensionSpec
 
 import javax.jcr.Binary
 
-class BinaryMetaClassRegistrySpec extends GroovyExtensionSpec {
+class BinaryMetaClassSpec extends GroovyExtensionSpec {
 
     def "execute closure and dispose binary"() {
         setup:

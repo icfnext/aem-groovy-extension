@@ -4,6 +4,10 @@ import com.citytechinc.aem.groovy.extension.GroovyExtensionSpec
 
 class PageBuilderSpec extends GroovyExtensionSpec {
 
+    def cleanup() {
+        removeAllNodes()
+    }
+
     def "build page"() {
         setup:
         pageBuilder.foo()

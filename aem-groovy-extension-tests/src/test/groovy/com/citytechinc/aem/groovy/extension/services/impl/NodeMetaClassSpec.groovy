@@ -1,10 +1,10 @@
-package com.citytechinc.aem.groovy.extension.metaclass
+package com.citytechinc.aem.groovy.extension.services.impl
 
 import com.citytechinc.aem.groovy.extension.GroovyExtensionSpec
 import spock.lang.Unroll
 
 @Unroll
-class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
+class NodeMetaClassSpec extends GroovyExtensionSpec {
 
     def setup() {
         nodeBuilder.test {
@@ -16,6 +16,10 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
             child2("sling:Folder", ["singleValuedProperty": "1"])
             child3("sling:Folder", ["multiValuedProperty": ["1", "2"].toArray(new String[0])])
         }
+    }
+
+    def cleanup() {
+        removeAllNodes()
     }
 
     def "iterator"() {
@@ -110,7 +114,7 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
 
     def "set binary"() {
         setup:
-        def binary
+        def binary = null
 
         this.class.getResourceAsStream("/file").withStream { stream ->
             binary = session.valueFactory.createBinary(stream)
@@ -183,7 +187,7 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
         "child4"     | "sling:Folder" | "/test/child4"
     }
 
-    def "remove existing node"() {
+    def "move existing node"() {
         setup:
         def node = getNode("/test")
 
@@ -246,5 +250,5 @@ class NodeMetaClassRegistrySpec extends GroovyExtensionSpec {
 
         expect:
         !child.prevSibling
-	}
+    }
 }

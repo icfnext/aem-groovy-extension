@@ -4,12 +4,11 @@
     <parent>
         <groupId>com.citytechinc.aem.groovy.extension</groupId>
         <artifactId>aem-groovy-extension</artifactId>
-        <version>0.8.2</version>
+        <version>0.9.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>aem-groovy-extension-bundle</artifactId>
-    <version>0.8.2</version>
     <packaging>bundle</packaging>
     <name>AEM Groovy Extension Bundle</name>
 
@@ -17,89 +16,16 @@
         <maven.test.skip>true</maven.test.skip>
     </properties>
 
-    <profiles>
-        <profile>
-            <id>install-bundles</id>
-            <activation>
-                <property>
-                    <name>install-bundles</name>
-                </property>
-            </activation>
-            <properties>
-                <aem.host>localhost</aem.host>
-                <aem.port>4502</aem.port>
-                <aem.username>admin</aem.username>
-                <aem.password>admin</aem.password>
-            </properties>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-dependency-plugin</artifactId>
-                        <version>2.8</version>
-                        <executions>
-                            <execution>
-                                <phase>install</phase>
-                                <goals>
-                                    <goal>copy-dependencies</goal>
-                                </goals>
-                                <configuration>
-                                    <includeGroupIds>org.codehaus.groovy</includeGroupIds>
-                                    <includeArtifactIds>groovy-all</includeArtifactIds>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.sling</groupId>
-                        <artifactId>maven-sling-plugin</artifactId>
-                        <version>2.1.0</version>
-                        <executions>
-                            <execution>
-                                <id>install-groovy</id>
-                                <phase>install</phase>
-                                <goals>
-                                    <goal>install</goal>
-                                </goals>
-                                <configuration>
-                                    <bundleFileName>${project.build.directory}/dependency/groovy-all-${groovy.version}.jar</bundleFileName>
-                                    <slingUrl>http://${aem.host}:${aem.port}/system/console/install</slingUrl>
-                                    <user>${aem.username}</user>
-                                    <password>${aem.password}</password>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>install-groovy-extension</id>
-                                <phase>install</phase>
-                                <goals>
-                                    <goal>install</goal>
-                                </goals>
-                                <configuration>
-                                    <slingUrl>http://${aem.host}:${aem.port}/system/console/install</slingUrl>
-                                    <user>${aem.username}</user>
-                                    <password>${aem.password}</password>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
     <build>
         <sourceDirectory>src/main/groovy</sourceDirectory>
         <plugins>
-            <plugin>
-                <groupId>org.codehaus.groovy</groupId>
-                <artifactId>groovy-eclipse-compiler</artifactId>
-            </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-scr-plugin</artifactId>
-                <version>1.15.0</version>
+                <version>1.20.0</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
@@ -116,12 +42,12 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>2.4.0</version>
+                <version>2.5.0</version>
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-                        <Export-Package>com.citytechinc.aem.groovy.extension.*</Export-Package>
+                        <Export-Package>!*.impl,com.citytechinc.aem.groovy.extension.*</Export-Package>
                         <DynamicImport-Package>*</DynamicImport-Package>
                     </instructions>
                 </configuration>
@@ -139,7 +65,7 @@
                         <configuration>
                             <target>
                                 <taskdef name="groovydoc" classname="org.codehaus.groovy.ant.Groovydoc" classpathref="maven.compile.classpath" />
-                                <groovydoc destdir="${project.reporting.outputDirectory}/groovydocs" sourcepath="${basedir}/src/main/groovy" packagenames="com.citytechinc.aem.groovy.extension.builders.*,com.citytechinc.aem.groovy.extension.metaclass.*" use="true" windowtitle="${project.name}" doctitle="${project.name}">
+                                <groovydoc destdir="${project.reporting.outputDirectory}/groovydocs" sourcepath="${basedir}/src/main/groovy" use="true" windowtitle="${project.name}" doctitle="${project.name}">
                                     <link packages="java.,org.xml.,javax.,org.xml." href="http://download.oracle.com/javase/6/docs/api" />
                                     <link packages="groovy.,org.codehaus.groovy." href="http://groovy.codehaus.org/api/" />
                                 </groovydoc>
@@ -183,7 +109,7 @@
         <dependency>
             <groupId>org.apache.felix</groupId>
             <artifactId>org.apache.felix.scr.annotations</artifactId>
-            <version>1.9.6</version>
+            <version>1.9.8</version>
         </dependency>
     </dependencies>
 </project>
