@@ -321,6 +321,9 @@ class DefaultMetaClassExtensionProvider implements MetaClassExtensionProvider {
                 break
             case PropertyType.URI:
                 result = value.string
+                break
+            case PropertyType.PATH:
+                result = value.string
         }
 
         result
