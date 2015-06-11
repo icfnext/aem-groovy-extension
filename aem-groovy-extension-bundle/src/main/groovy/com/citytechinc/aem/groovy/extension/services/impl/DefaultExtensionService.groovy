@@ -2,6 +2,7 @@ package com.citytechinc.aem.groovy.extension.services.impl
 
 import com.citytechinc.aem.groovy.extension.api.MetaClassExtensionProvider
 import com.citytechinc.aem.groovy.extension.services.ExtensionService
+import groovy.transform.Synchronized
 import groovy.util.logging.Slf4j
 import org.apache.felix.scr.annotations.Component
 import org.apache.felix.scr.annotations.Reference
@@ -9,6 +10,8 @@ import org.apache.felix.scr.annotations.ReferenceCardinality
 import org.apache.felix.scr.annotations.ReferencePolicy
 import org.apache.felix.scr.annotations.Service
 import org.codehaus.groovy.runtime.InvokerHelper
+
+import java.util.concurrent.CopyOnWriteArrayList
 
 /**
  * This default extension service exposes the set of registered metaclasses while providing for the binding and
@@ -21,7 +24,7 @@ class DefaultExtensionService implements ExtensionService {
 
     @Reference(cardinality = ReferenceCardinality.OPTIONAL_MULTIPLE,
         referenceInterface = MetaClassExtensionProvider, policy = ReferencePolicy.DYNAMIC)
-    List<MetaClassExtensionProvider> metaClassExtensionProviders = []
+    List<MetaClassExtensionProvider> metaClassExtensionProviders = new CopyOnWriteArrayList<>()
 
     @Override
     Set<Class> getMetaClasses() {
@@ -34,6 +37,7 @@ class DefaultExtensionService implements ExtensionService {
         metaClasses
     }
 
+    @Synchronized
     void bindMetaClassExtensionProvider(MetaClassExtensionProvider extension) {
         metaClassExtensionProviders.add(extension)
 
@@ -46,6 +50,7 @@ class DefaultExtensionService implements ExtensionService {
         }
     }
 
+    @Synchronized
     void unbindMetaClassExtensionProvider(MetaClassExtensionProvider extension) {
         metaClassExtensionProviders.remove(extension)
 
