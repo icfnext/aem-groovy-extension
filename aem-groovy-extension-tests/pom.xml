@@ -80,7 +80,7 @@
         <dependency>
             <groupId>com.citytechinc.aem.prosper</groupId>
             <artifactId>prosper</artifactId>
-            <version>3.0.0</version>
+            <version>4.0.0</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
