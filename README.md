@@ -18,7 +18,8 @@ new NodeBuilder(session).content {
 
 ## Requirements
 
-* AEM 6.0  running on localhost:4502 (versions 0.8.x and above)
+* AEM 6.1 running on localhost:4502 (versions 1.x and above)
+* Versions 0.8.x - 0.9.x are compatible with AEM 6.0.
 * Versions 0.7.x and below are compatible with CQ 5.6
 * [Maven](http://maven.apache.org/) 3.x
 
@@ -29,7 +30,7 @@ new NodeBuilder(session).content {
         <dependency>
             <groupId>com.citytechinc.aem.groovy.extension</groupId>
             <artifactId>aem-groovy-extension-bundle</artifactId>
-            <version>0.9.0</version>
+            <version>1.0.0</version>
             <scope>provided</scope>
         </dependency>
 
