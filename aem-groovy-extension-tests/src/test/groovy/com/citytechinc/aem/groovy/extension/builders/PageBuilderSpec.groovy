@@ -14,7 +14,7 @@ class PageBuilderSpec extends GroovyExtensionSpec {
 
         expect:
         assertNodeExists("/foo", "cq:Page")
-        assertNodeExists("/foo/jcr:content")
+        assertNodeExists("/foo/jcr:content", "cq:PageContent")
     }
 
     def "build page with properties"() {

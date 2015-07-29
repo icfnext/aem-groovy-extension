@@ -38,6 +38,8 @@ import javax.jcr.Session
  */
 class PageBuilder extends AbstractContentBuilder {
 
+    private static final String NT_PAGE_CONTENT = "cq:PageContent"
+
     PageBuilder(Session session) {
         super(session, session.rootNode)
     }
@@ -100,7 +102,7 @@ class PageBuilder extends AbstractContentBuilder {
 
     private Node getOrAddPage(map) {
         def pageNode = currentNode.getOrAddNode(map.name, NameConstants.NT_PAGE)
-        def contentNode = pageNode.getOrAddNode(JcrConstants.JCR_CONTENT)
+        def contentNode = pageNode.getOrAddNode(JcrConstants.JCR_CONTENT, NT_PAGE_CONTENT)
 
         if (map.title) {
             contentNode.set(JcrConstants.JCR_TITLE, map.title)
