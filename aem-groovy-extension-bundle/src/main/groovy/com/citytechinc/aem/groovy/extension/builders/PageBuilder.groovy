@@ -37,7 +37,8 @@ import javax.jcr.Session
  * </ul>
  */
 class PageBuilder extends AbstractContentBuilder {
-    private static final String NT_PAGE_CONTENT = 'cq:PageContent'
+
+    private static final String NT_PAGE_CONTENT = "cq:PageContent"
 
     PageBuilder(Session session) {
         super(session, session.rootNode)
