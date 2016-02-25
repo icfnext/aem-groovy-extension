@@ -5,6 +5,8 @@ import com.day.cq.wcm.api.Page
 import groovy.util.logging.Slf4j
 import org.apache.felix.scr.annotations.Component
 import org.apache.felix.scr.annotations.Service
+import org.apache.sling.api.resource.ValueMap
+import org.apache.sling.jcr.resource.JcrPropertyMap
 
 import javax.jcr.Binary
 import javax.jcr.Node
@@ -122,6 +124,18 @@ class DefaultMetaClassExtensionProvider implements MetaClassExtensionProvider {
     }
 
     static def NODE_METACLASS = {
+        asType { Class clazz ->
+            def result
+
+            if (clazz == ValueMap) {
+                result = new JcrPropertyMap(delegate)
+            } else {
+                result = delegate
+            }
+
+            result
+        }
+
         iterator {
             delegate.nodes
         }
@@ -329,7 +343,7 @@ class DefaultMetaClassExtensionProvider implements MetaClassExtensionProvider {
         result
     }
 
-    private static def getNodeFromValue(Session session, Value value) {
+    private static Node getNodeFromValue(Session session, Value value) {
         def uuid = value.string
 
         uuid ? session.getNodeByIdentifier(uuid) : null
