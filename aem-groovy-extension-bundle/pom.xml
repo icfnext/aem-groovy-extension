@@ -49,6 +49,11 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Export-Package>!*.impl,com.citytechinc.aem.groovy.extension.*</Export-Package>
                         <DynamicImport-Package>*</DynamicImport-Package>
+                        <!-- Exported package versions differ in major version between AEM61 and AEM62 -->
+                        <Import-Package>
+                          com.day.cq.commons.jcr;version="[5.7,7)",
+                          *
+                        </Import-Package>
                     </instructions>
                 </configuration>
             </plugin>
