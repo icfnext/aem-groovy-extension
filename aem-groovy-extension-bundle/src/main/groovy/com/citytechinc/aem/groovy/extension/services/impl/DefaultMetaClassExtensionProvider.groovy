@@ -2,6 +2,7 @@ package com.citytechinc.aem.groovy.extension.services.impl
 
 import com.citytechinc.aem.groovy.extension.api.MetaClassExtensionProvider
 import com.day.cq.wcm.api.Page
+import com.google.common.base.Optional
 import groovy.util.logging.Slf4j
 import org.apache.felix.scr.annotations.Component
 import org.apache.felix.scr.annotations.Service
@@ -69,20 +70,30 @@ import javax.servlet.jsp.JspContext
  * <a href="http://docs.oracle.com/javaee/6/api/javax/servlet/jsp/JspContext.html">javax.servlet.jsp.JspContext</a>
  *
  * <ul>
- *     <li>getAt(String name) - Supports use of the <a href="http://groovy.codehaus.org/Operators#Operators-OtherOperators">subscript operator</a> to get an attribute value.</li>
- *     <li>putAt(String name, Object value) - Supports use of the <a href="http://groovy.codehaus.org/Operators#Operators-OtherOperators">subscript operator</a> to set an attribute value.</li>
+ *     <li>getAt(String name) - Supports use of the <a href="http://groovy.codehaus
+ *     .org/Operators#Operators-OtherOperators">subscript operator</a> to get an attribute value.</li>
+ *     <li>putAt(String name, Object value) - Supports use of the <a href="http://groovy.codehaus
+ *     .org/Operators#Operators-OtherOperators">subscript operator</a> to set an attribute value.</li>
  * </ul>
  *
  * <a href="http://docs.oracle.com/javaee/6/api/javax/servlet/ServletRequest.html">javax.servlet.ServletRequest</a>
  *
  * <ul>
- *     <li>getAt(String name) - Supports use of the <a href="http://groovy.codehaus.org/Operators#Operators-OtherOperators">subscript operator</a> to get a request parameter value.  If the value is an array, a list will be returned.</li>
+ *     <li>getAt(String name) - Supports use of the <a href="http://groovy.codehaus
+ *     .org/Operators#Operators-OtherOperators">subscript operator</a> to get a request parameter value.  If the
+ *     value is an array, a list will be returned.</li>
  * </ul>
  */
 @Service(MetaClassExtensionProvider)
 @Component(immediate = true)
 @Slf4j("LOG")
 class DefaultMetaClassExtensionProvider implements MetaClassExtensionProvider {
+
+    static def OPTIONAL_METACLASS = {
+        asBoolean {
+            delegate != null && delegate.present
+        }
+    }
 
     static def JSP_CONTEXT_METACLASS = {
         getAt { String attributeName ->
@@ -293,13 +304,18 @@ class DefaultMetaClassExtensionProvider implements MetaClassExtensionProvider {
         }
     }
 
+    static def DEFAULT_METACLASSES = [
+        (Optional): OPTIONAL_METACLASS,
+        (JspContext): JSP_CONTEXT_METACLASS,
+        (ServletRequest): SERVLET_REQUEST_METACLASS,
+        (Binary): BINARY_METACLASS,
+        (Node): NODE_METACLASS,
+        (Page): PAGE_METACLASS
+    ]
+
     @Override
     Map<Class, Closure> getMetaClasses() {
-        [(JspContext)    : JSP_CONTEXT_METACLASS,
-         (ServletRequest): SERVLET_REQUEST_METACLASS,
-         (Binary)        : BINARY_METACLASS,
-         (Node)          : NODE_METACLASS,
-         (Page)          : PAGE_METACLASS]
+        DEFAULT_METACLASSES
     }
 
     private static def getResult(Session session, Value value) {
