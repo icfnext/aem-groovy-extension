@@ -1,6 +1,7 @@
 package com.citytechinc.aem.groovy.extension.services.impl
 
 import com.citytechinc.aem.groovy.extension.GroovyExtensionSpec
+import org.apache.sling.api.resource.ValueMap
 import spock.lang.Unroll
 
 @Unroll
@@ -250,5 +251,17 @@ class NodeMetaClassSpec extends GroovyExtensionSpec {
 
         expect:
         !child.prevSibling
+    }
+
+    def "as value map"() {
+        setup:
+        def node = getNode("/test/child2")
+        def properties = node as ValueMap
+
+        expect:
+        properties
+
+        and:
+        properties.get("singleValuedProperty", "") == "1"
     }
 }
