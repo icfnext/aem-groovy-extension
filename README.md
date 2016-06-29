@@ -57,7 +57,7 @@ If you are running AEM with a context path, set the Maven property `aem.context.
 
 ## Registering Additional Metaclasses
 
-Services implementing the `com.citytechinc.aem.groovy.extension.api.MetaClassExtensionProvider` will be automatically discovered and bound by the OSGi container.  These services can be implemented in any deployed bundle.  The AEM Groovy Extension bundle will handle the registration and removal of supplied metaclasses as these services are activated/deactivated in the container.  See the `DefaultMetaClassExtensionProvider` service for the proper closure syntax for registering metaclasses.
+Services implementing the `com.icfolson.aem.groovy.extension.api.MetaClassExtensionProvider` will be automatically discovered and bound by the OSGi container.  These services can be implemented in any deployed bundle.  The AEM Groovy Extension bundle will handle the registration and removal of supplied metaclasses as these services are activated/deactivated in the container.  See the `DefaultMetaClassExtensionProvider` service for the proper closure syntax for registering metaclasses.
 
 ## Versioning
 
