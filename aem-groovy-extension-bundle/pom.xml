@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.icfolson.aem.groovy.extension</groupId>
         <artifactId>aem-groovy-extension</artifactId>
-        <version>2.0.0</version>
+        <version>3.0.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -71,7 +71,11 @@
                             <target>
                                 <taskdef name="groovydoc" classname="org.codehaus.groovy.ant.Groovydoc" classpathref="maven.compile.classpath" />
                                 <groovydoc destdir="${project.reporting.outputDirectory}/groovydocs" sourcepath="${basedir}/src/main/groovy" use="true" windowtitle="${project.name}" doctitle="${project.name}">
-                                    <link packages="java.,org.xml.,javax.,org.xml." href="http://download.oracle.com/javase/6/docs/api" />
+                                    <link packages="com.day.cq.wcm.api." href="https://docs.adobe.com/docs/en/aem/6-2/develop/ref/javadoc" />
+                                    <link packages="org.apache.sling." href="http://sling.apache.org/apidocs/sling7" />
+                                    <link packages="javax.jcr." href="https://docs.adobe.com/content/docs/en/spec/jsr170/javadocs/jcr-2.0/" />
+                                    <link packages="java." href="https://docs.oracle.com/javase/7/docs/api" />
+                                    <link packages="javax." href="https://docs.oracle.com/javaee/7/api" />
                                     <link packages="groovy.,org.codehaus.groovy." href="http://groovy.codehaus.org/api/" />
                                 </groovydoc>
                             </target>

@@ -20,8 +20,7 @@ import javax.servlet.jsp.JspContext
 /**
  * This default metaclass provider adds additional methods to all instances of the classes outlined below.
  * <p/>
- * <a href="http://dev.day.com/content/docs/en/cq/current/javadoc/com/day/cq/wcm/api/Page.html">com.day.cq.wcm.api
- * .Page</a>
+ * <a href="https://docs.adobe.com/docs/en/aem/6-2/develop/ref/javadoc/com/day/cq/wcm/api/Page.html">com.day.cq.wcm.api.Page</a>
  *
  * <ul>
  *     <li>iterator() - Allows usage of Groovy closure operators (<code>each</code>,
@@ -37,13 +36,13 @@ import javax.servlet.jsp.JspContext
  *     of the current page.  An array value argument can be used to set multi-valued properties.</li>
  * </ul>
  *
- * <a href="http://www.day.com/maven/jsr170/javadocs/jcr-2.0/javax/jcr/Node.html">javax.jcr.Node</a>
+ * <a href="https://docs.adobe.com/content/docs/en/spec/jsr170/javadocs/jcr-2.0/javax/jcr/Node.html">javax.jcr.Node</a>
  *
  * <ul>
  *     <li>iterator() - Allows usage of Groovy closure operators (<code>each</code>,
  *     <code>eachWithIndex</code>) to iterate over child nodes of the current node.</li>
  *     <li>get(String propertyName) - Get the named property value, with the return type determined dynamically by <a
- *     href="http://www.day.com/maven/jsr170/javadocs/jcr-2.0/javax/jcr/Property.html#getType()"
+ *     href="https://docs.adobe.com/docs/en/spec/jsr170/javadocs/jcr-2.0/javax/jcr/Property.html#getType()"
  *     target="_blank">Property.getType()</a>.</li>
  *     <li>set(String propertyName, Object value) - Set the named property value.  An array value argument can be
  *     used to set multi-valued properties.</li>
@@ -60,7 +59,7 @@ import javax.servlet.jsp.JspContext
  *     on each descendant node of the current node that matches any of the given node types.</li>
  * </ul>
  *
- * <a href="http://www.day.com/maven/jsr170/javadocs/jcr-2.0/javax/jcr/Binary.html">javax.jcr.Binary</a>
+ * <a href="https://docs.adobe.com/content/docs/en/spec/jsr170/javadocs/jcr-2.0/javax/jcr/Binary.html">javax.jcr.Binary</a>
  *
  * <ul>
  *     <li>withBinary(Closure closure) - Execute the closure and automatically dispose of the binary's resources when

@@ -12,7 +12,7 @@ abstract class AbstractContentBuilder extends BuilderSupport {
 
     Node currentNode
 
-    AbstractContentBuilder(session, currentNode) {
+    AbstractContentBuilder(Session session, Node currentNode) {
         this.session = session
         this.currentNode = currentNode
     }

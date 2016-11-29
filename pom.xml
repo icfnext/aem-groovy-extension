@@ -2,7 +2,7 @@
 
     <parent>
         <groupId>com.icfolson.aem</groupId>
-        <artifactId>parent</artifactId>
+        <artifactId>aem-parent-uber-jar</artifactId>
         <version>6.2.0</version>
     </parent>
 
@@ -10,18 +10,18 @@
     <groupId>com.icfolson.aem.groovy.extension</groupId>
     <artifactId>aem-groovy-extension</artifactId>
     <packaging>pom</packaging>
-    <version>2.0.0</version>
+    <version>3.0.0</version>
     <name>AEM Groovy Extension</name>
     <description>OSGi bundle containing Groovy builders and metaclasses for AEM (Adobe CQ).</description>
 
     <organization>
-        <name>ICF Olson</name>
-        <url>http://www.icfolson.com</url>
+        <name>Olson Digital</name>
+        <url>http://www.digitalatolson.com</url>
     </organization>
 
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/Citytechinc/aem-groovy-extension/issues</url>
+        <url>https://github.com/OlsonDigital/aem-groovy-extension/issues</url>
     </issueManagement>
 
     <modules>
@@ -31,28 +31,10 @@
     </modules>
 
     <scm>
-        <connection>scm:git:git@github.com:Citytechinc/aem-groovy-extension.git</connection>
-        <url>https://github.com/Citytechinc/aem-groovy-extension</url>
-        <developerConnection>scm:git:git@github.com:Citytechinc/aem-groovy-extension.git</developerConnection>
+        <connection>scm:git:git@github.com:OlsonDigital/aem-groovy-extension.git</connection>
+        <url>https://github.com/OlsonDigital/aem-groovy-extension</url>
+        <developerConnection>scm:git:git@github.com:OlsonDigital/aem-groovy-extension.git</developerConnection>
     </scm>
-
-    <repositories>
-        <repository>
-            <id>citytech-public</id>
-            <url>http://nexus.citytech.ctmsp.com/content/groups/public</url>
-        </repository>
-    </repositories>
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>sonatype-nexus-staging</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>sonatype-nexus-staging</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
 
     <properties>
         <maven.junit.usefile>false</maven.junit.usefile>
@@ -284,41 +266,17 @@
     <dependencies>
         <!-- inherited -->
         <dependency>
+            <groupId>com.adobe.aem</groupId>
+            <artifactId>uber-jar</artifactId>
+            <classifier>apis</classifier>
+        </dependency>
+        <dependency>
             <groupId>javax.jcr</groupId>
             <artifactId>jcr</artifactId>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jsp-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.jcr.resource</artifactId>
-            <version>2.7.4</version>
-        </dependency>
-        <dependency>
-            <groupId>com.day.cq</groupId>
-            <artifactId>cq-tagging</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.day.cq.wcm</groupId>
-            <artifactId>cq-wcm-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.day.cq</groupId>
-            <artifactId>cq-commons</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.adobe.granite.osgi.wrapper</groupId>
-            <artifactId>com.adobe.granite.osgi.wrapper.guava</artifactId>
         </dependency>
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
