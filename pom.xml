@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.icfolson.aem</groupId>
         <artifactId>aem-parent-uber-jar</artifactId>
-        <version>6.2.0-SNAPSHOT</version>
+        <version>6.2.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -15,8 +15,8 @@
     <description>OSGi bundle containing Groovy builders and metaclasses for AEM (Adobe CQ).</description>
 
     <organization>
-        <name>ICF Olson</name>
-        <url>http://www.icfolson.com</url>
+        <name>Olson Digital</name>
+        <url>http://www.digitalatolson.com</url>
     </organization>
 
     <issueManagement>
@@ -35,24 +35,6 @@
         <url>https://github.com/OlsonDigital/aem-groovy-extension</url>
         <developerConnection>scm:git:git@github.com:OlsonDigital/aem-groovy-extension.git</developerConnection>
     </scm>
-
-    <repositories>
-        <repository>
-            <id>citytech-public</id>
-            <url>http://nexus.citytech.ctmsp.com/content/groups/public</url>
-        </repository>
-    </repositories>
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>sonatype-nexus-staging</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>sonatype-nexus-staging</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
 
     <properties>
         <maven.junit.usefile>false</maven.junit.usefile>
