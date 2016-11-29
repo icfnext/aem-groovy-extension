@@ -1,6 +1,6 @@
 # AEM Groovy Extension
 
-[ICF Olson](http://www.icfolson.com)
+[Olson Digital](http://www.digitalatolson.com/)
 
 ## Overview
 
