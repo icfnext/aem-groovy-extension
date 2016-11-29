@@ -3,8 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
 
     <skin>
-        <groupId>com.citytechinc.maven</groupId>
-        <artifactId>citytech-maven-skin</artifactId>
+        <groupId>com.icfolson.maven</groupId>
+        <artifactId>icfolson-maven-skin</artifactId>
         <version>1.0.0</version>
     </skin>
 
@@ -27,7 +27,7 @@
             <topNav>reports</topNav>
             <brand>
                 <name>${project.name}</name>
-                <href>./index.html</href>
+                <href>http://code.digitalatolson.com/aem-groovy-extension</href>
             </brand>
             <slogan></slogan>
             <body />
@@ -39,7 +39,7 @@
 
     <body>
         <links>
-            <item name="GitHub" href="https://github.com/Citytechinc/aem-groovy-extension"/>
+            <item name="GitHub" href="https://github.com/OlsonDigital/aem-groovy-extension"/>
             <item name="GroovyDocs" href="groovydocs/index.html"/>
         </links>
         <menu ref="reports"/>
