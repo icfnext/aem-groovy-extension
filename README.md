@@ -32,7 +32,7 @@ new NodeBuilder(session).content {
         <dependency>
             <groupId>com.icfolson.aem.groovy.extension</groupId>
             <artifactId>aem-groovy-extension-bundle</artifactId>
-            <version>2.0.0</version>
+            <version>4.0.0</version>
             <scope>provided</scope>
         </dependency>
 
