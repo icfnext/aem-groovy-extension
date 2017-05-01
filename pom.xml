@@ -3,14 +3,14 @@
     <parent>
         <groupId>com.icfolson.aem</groupId>
         <artifactId>aem-parent-uber-jar</artifactId>
-        <version>6.2.0</version>
+        <version>6.3.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.icfolson.aem.groovy.extension</groupId>
     <artifactId>aem-groovy-extension</artifactId>
     <packaging>pom</packaging>
-    <version>3.0.0</version>
+    <version>4.0.0</version>
     <name>AEM Groovy Extension</name>
     <description>OSGi bundle containing Groovy builders and metaclasses for AEM (Adobe CQ).</description>
 
@@ -257,7 +257,7 @@
             <dependency>
                 <groupId>org.codehaus.groovy</groupId>
                 <artifactId>groovy-all</artifactId>
-                <version>2.4.7</version>
+                <version>2.4.11</version>
                 <scope>provided</scope>
             </dependency>
         </dependencies>

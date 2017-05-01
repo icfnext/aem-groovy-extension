@@ -4,7 +4,7 @@
 
 ## Overview
 
-OSGi bundle containing Groovy builders and metaclasses for AEM (Adobe CQ).  The bundle exposes an API to implement extension "provider" services to register additional Groovy metaclasses in the container.
+OSGi bundle containing Groovy builders and metaclasses for AEM.  The bundle exposes an API to implement extension "provider" services to register additional Groovy metaclasses in the container.
 
 ```groovy
 new NodeBuilder(session).content {
@@ -18,7 +18,8 @@ new NodeBuilder(session).content {
 
 ## Requirements
 
-* AEM 6.2 running on localhost:4502 (versions 1.x and above)
+* AEM 6.3 running on localhost:4502 (versions 1.x and above)
+* Versions 2.x.x through 3.x.x are compatible with AEM 6.2. 
 * Versions 1.x.x are compatible with AEM 6.1.
 * Versions 0.8.x - 0.9.x are compatible with AEM 6.0.
 * Versions 0.7.x and below are compatible with CQ 5.6
@@ -31,7 +32,7 @@ new NodeBuilder(session).content {
         <dependency>
             <groupId>com.icfolson.aem.groovy.extension</groupId>
             <artifactId>aem-groovy-extension-bundle</artifactId>
-            <version>2.0.0</version>
+            <version>4.0.0</version>
             <scope>provided</scope>
         </dependency>
 
