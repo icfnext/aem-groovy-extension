@@ -24,7 +24,7 @@ class DefaultExtensionService implements ExtensionService {
 
     @Reference(cardinality = ReferenceCardinality.OPTIONAL_MULTIPLE,
         referenceInterface = MetaClassExtensionProvider, policy = ReferencePolicy.DYNAMIC)
-    List<MetaClassExtensionProvider> metaClassExtensionProviders = new CopyOnWriteArrayList<>()
+    private List<MetaClassExtensionProvider> metaClassExtensionProviders = new CopyOnWriteArrayList<>()
 
     @Override
     Set<Class> getMetaClasses() {
