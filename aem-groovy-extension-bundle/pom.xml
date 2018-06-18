@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.icfolson.aem.groovy.extension</groupId>
         <artifactId>aem-groovy-extension</artifactId>
-        <version>4.0.0</version>
+        <version>5.0.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -17,7 +17,6 @@
     </properties>
 
     <build>
-        <sourceDirectory>src/main/groovy</sourceDirectory>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -47,13 +46,17 @@
                 <configuration>
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Name>${project.name}</Bundle-Name>
+                        <Bundle-Vendor>${project.parent.organization.name}</Bundle-Vendor>
                         <Export-Package>!*.impl,com.icfolson.aem.groovy.extension.*</Export-Package>
                         <DynamicImport-Package>*</DynamicImport-Package>
                         <!-- Exported package versions differ in major version between AEM61 and AEM62 -->
+                        <!--
                         <Import-Package>
                           com.day.cq.commons.jcr;version="[5.7,7)",
                           *
                         </Import-Package>
+                        -->
                     </instructions>
                 </configuration>
             </plugin>
