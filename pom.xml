@@ -12,7 +12,7 @@
     <packaging>pom</packaging>
     <version>5.0.1-SNAPSHOT</version>
     <name>AEM Groovy Extension</name>
-    <description>OSGi bundle containing Groovy builders and metaclasses for AEM (Adobe CQ).</description>
+    <description>OSGi bundle containing Groovy builders and metaclasses for Adobe Experience Manager.</description>
 
     <organization>
         <name>Olson Digital</name>
@@ -43,7 +43,7 @@
         <aem.package.skip>true</aem.package.skip>
         <aem.package.goal>install</aem.package.goal>
         <aem.username>admin</aem.username>
-        <aem.context.path />
+        <aem.context.path/>
         <osgi.bundle.status.skip.author>true</osgi.bundle.status.skip.author>
         <osgi.bundle.status.skip.publish>true</osgi.bundle.status.skip.publish>
     </properties>
