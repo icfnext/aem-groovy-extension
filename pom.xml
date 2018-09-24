@@ -10,7 +10,7 @@
     <groupId>com.icfolson.aem.groovy.extension</groupId>
     <artifactId>aem-groovy-extension</artifactId>
     <packaging>pom</packaging>
-    <version>5.1.0-SNAPSHOT</version>
+    <version>6.0.0</version>
     <name>AEM Groovy Extension</name>
     <description>OSGi bundle containing Groovy builders and metaclasses for Adobe Experience Manager.</description>
 
