@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.icfolson.aem.groovy.extension</groupId>
         <artifactId>aem-groovy-extension</artifactId>
-        <version>5.1.0</version>
+        <version>6.0.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>

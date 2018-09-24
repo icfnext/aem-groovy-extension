@@ -13,7 +13,6 @@ import javax.jcr.PropertyType
 import javax.jcr.Session
 import javax.jcr.Value
 import javax.servlet.ServletRequest
-import javax.servlet.jsp.JspContext
 
 /**
  * This default metaclass provider adds additional methods to all instances of the classes outlined below.
@@ -89,16 +88,6 @@ class DefaultMetaClassExtensionProvider implements MetaClassExtensionProvider {
     static def OPTIONAL_METACLASS = {
         asBoolean {
             delegate != null && delegate.present
-        }
-    }
-
-    static def JSP_CONTEXT_METACLASS = {
-        getAt { String attributeName ->
-            delegate.getAttribute(attributeName)
-        }
-
-        putAt { String attributeName, Object value ->
-            delegate.setAttribute(attributeName, value)
         }
     }
 
@@ -291,7 +280,6 @@ class DefaultMetaClassExtensionProvider implements MetaClassExtensionProvider {
 
     static def DEFAULT_METACLASSES = [
         (Optional): OPTIONAL_METACLASS,
-        (JspContext): JSP_CONTEXT_METACLASS,
         (ServletRequest): SERVLET_REQUEST_METACLASS,
         (Binary): BINARY_METACLASS,
         (Node): NODE_METACLASS,
