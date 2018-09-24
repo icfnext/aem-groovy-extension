@@ -4,7 +4,7 @@
 
 ## Overview
 
-OSGi bundle containing Groovy builders and metaclasses for AEM.  The bundle exposes an API to implement extension "provider" services to register additional Groovy metaclasses in the container.
+OSGi bundle containing Groovy builders and metaclasses for Adobe Experience Manager.  The bundle exposes an API to implement extension "provider" services to register additional Groovy metaclasses in the container.
 
 ```groovy
 new NodeBuilder(session).content {
