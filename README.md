@@ -16,6 +16,8 @@ new NodeBuilder(session).content {
 }
 ```
 
+See [Groovydocs](http://code.digitalatolson.com/aem-groovy-extension/groovydocs/index.html) for complete API documentation.
+
 ## Requirements
 
 * AEM 6.x running on localhost:4502
