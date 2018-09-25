@@ -63,15 +63,6 @@ import javax.servlet.ServletRequest
  *     the closure completes.  The closure accepts a single argument with the current binary instance.</li>
  * </ul>
  *
- * <a href="http://docs.oracle.com/javaee/6/api/javax/servlet/jsp/JspContext.html">javax.servlet.jsp.JspContext</a>
- *
- * <ul>
- *     <li>getAt(String name) - Supports use of the <a href="http://groovy.codehaus
- *     .org/Operators#Operators-OtherOperators">subscript operator</a> to get an attribute value.</li>
- *     <li>putAt(String name, Object value) - Supports use of the <a href="http://groovy.codehaus
- *     .org/Operators#Operators-OtherOperators">subscript operator</a> to set an attribute value.</li>
- * </ul>
- *
  * <a href="http://docs.oracle.com/javaee/6/api/javax/servlet/ServletRequest.html">javax.servlet.ServletRequest</a>
  *
  * <ul>
