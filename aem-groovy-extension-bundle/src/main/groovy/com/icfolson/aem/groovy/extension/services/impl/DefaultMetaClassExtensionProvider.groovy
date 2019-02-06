@@ -4,8 +4,7 @@ import com.icfolson.aem.groovy.extension.api.MetaClassExtensionProvider
 import com.day.cq.wcm.api.Page
 import com.google.common.base.Optional
 import groovy.util.logging.Slf4j
-import org.apache.felix.scr.annotations.Component
-import org.apache.felix.scr.annotations.Service
+import org.osgi.service.component.annotations.Component
 
 import javax.jcr.Binary
 import javax.jcr.Node
@@ -71,8 +70,7 @@ import javax.servlet.ServletRequest
  *     value is an array, a list will be returned.</li>
  * </ul>
  */
-@Service(MetaClassExtensionProvider)
-@Component(immediate = true)
+@Component(service = MetaClassExtensionProvider, immediate = true)
 @Slf4j("LOG")
 class DefaultMetaClassExtensionProvider implements MetaClassExtensionProvider {
 
