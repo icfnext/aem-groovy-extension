@@ -20,7 +20,10 @@ import java.util.concurrent.CopyOnWriteArrayList
 @Slf4j("LOG")
 class DefaultExtensionService implements ExtensionService {
 
-    @Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC)
+    @Reference(cardinality = ReferenceCardinality.MULTIPLE,
+        policy = ReferencePolicy.DYNAMIC,
+        bind = "bindMetaClassExtensionProvider",
+        unbind = "unbindMetaClassExtensionProvider")
     private volatile List<MetaClassExtensionProvider> metaClassExtensionProviders = new CopyOnWriteArrayList<>()
 
     @Override
