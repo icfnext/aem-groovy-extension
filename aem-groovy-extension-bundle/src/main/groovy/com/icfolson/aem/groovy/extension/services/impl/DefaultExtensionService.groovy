@@ -21,7 +21,7 @@ import java.util.concurrent.CopyOnWriteArrayList
 class DefaultExtensionService implements ExtensionService {
 
     @Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC)
-    private List<MetaClassExtensionProvider> metaClassExtensionProviders = new CopyOnWriteArrayList<>()
+    private volatile List<MetaClassExtensionProvider> metaClassExtensionProviders = new CopyOnWriteArrayList<>()
 
     @Override
     Set<Class> getMetaClasses() {
