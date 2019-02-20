@@ -10,7 +10,7 @@
     <name>AEM Groovy Extension</name>
     <description>OSGi bundle containing Groovy builders and metaclasses for Adobe Experience Manager.</description>
 
-    <url>https://github.com/OlsonDigital/aem-groovy-extension</url>
+    <url>https://github.com/icfnext/aem-groovy-extension</url>
 
     <organization>
         <name>ICF Next</name>
