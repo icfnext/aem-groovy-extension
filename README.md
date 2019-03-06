@@ -27,6 +27,7 @@ See [Groovydocs](http://code.digitalatolson.com/aem-groovy-extension/groovydocs/
 
 Groovy Extension Version(s) | AEM Version
 ------------ | -------------
+7.x.x | 6.3.3, 6.4
 6.x.x, 5.x.x | 6.4
 4.x.x | 6.3
 3.x.x, 2.x.x | 6.2
