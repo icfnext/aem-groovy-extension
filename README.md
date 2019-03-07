@@ -1,6 +1,6 @@
 # AEM Groovy Extension
 
-[Olson Digital](http://www.digitalatolson.com/)
+[ICF Next](http://www.icfnext.com/)
 
 ## Overview
 
@@ -16,7 +16,7 @@ new NodeBuilder(session).content {
 }
 ```
 
-See [Groovydocs](http://code.digitalatolson.com/aem-groovy-extension/groovydocs/index.html) for complete API documentation.
+See [Groovydocs](http://icfnext.github.io/aem-groovy-extension/groovydocs/index.html) for complete API documentation.
 
 ## Requirements
 
@@ -27,7 +27,7 @@ See [Groovydocs](http://code.digitalatolson.com/aem-groovy-extension/groovydocs/
 
 Groovy Extension Version(s) | AEM Version
 ------------ | -------------
-7.x.x | 6.3.3, 6.4
+7.x.x | 6.3, 6.4, 6.5
 6.x.x, 5.x.x | 6.4
 4.x.x | 6.3
 3.x.x, 2.x.x | 6.2
@@ -42,7 +42,7 @@ Groovy Extension Version(s) | AEM Version
         <dependency>
             <groupId>com.icfolson.aem.groovy.extension</groupId>
             <artifactId>aem-groovy-extension-bundle</artifactId>
-            <version>6.0.0</version>
+            <version>7.0.0</version>
             <scope>provided</scope>
         </dependency>
 
