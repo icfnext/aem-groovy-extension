@@ -26,8 +26,8 @@ class DefaultExtensionService implements ExtensionService {
     Set<Class> getMetaClasses() {
         def metaClasses = [] as LinkedHashSet
 
-        metaClassExtensionProviders.each {
-            metaClasses.addAll(it.metaClasses.keySet())
+        metaClassExtensionProviders.each { provider ->
+            metaClasses.addAll(provider.metaClasses.keySet())
         }
 
         metaClasses
