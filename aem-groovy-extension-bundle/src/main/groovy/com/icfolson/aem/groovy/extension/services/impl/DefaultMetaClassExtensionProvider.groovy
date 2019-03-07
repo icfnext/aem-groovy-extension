@@ -76,13 +76,16 @@ class DefaultMetaClassExtensionProvider implements MetaClassExtensionProvider {
 
     static def OPTIONAL_METACLASS = {
         asBoolean {
-            delegate != null && delegate.present
+            def optional = delegate as Optional
+
+            optional != null && optional.present
         }
     }
 
     static def SERVLET_REQUEST_METACLASS = {
         getAt { String parameterName ->
-            def value = delegate.parameterMap[parameterName] as String[]
+            def request = delegate as ServletRequest
+            def value = request.parameterMap[parameterName] as String[]
             def result
 
             if (value) {
@@ -97,12 +100,13 @@ class DefaultMetaClassExtensionProvider implements MetaClassExtensionProvider {
 
     static def BINARY_METACLASS = {
         withBinary { Closure c ->
+            def binary = delegate as Binary
             def result = null
 
             try {
-                result = c(delegate)
+                result = c(binary)
             } finally {
-                delegate.dispose()
+                binary.dispose()
             }
 
             result
@@ -111,47 +115,55 @@ class DefaultMetaClassExtensionProvider implements MetaClassExtensionProvider {
 
     static def NODE_METACLASS = {
         iterator {
-            delegate.nodes
+            (delegate as Node).nodes
         }
 
         recurse { Closure closure ->
+            def node = delegate as Node
+
             closure(delegate)
 
-            delegate.nodes.each { node ->
-                node.recurse(closure)
+            node.nodes.each { child ->
+                child.recurse(closure)
             }
         }
 
         recurse { String primaryNodeTypeName, Closure closure ->
-            if (delegate.primaryNodeType.name == primaryNodeTypeName) {
+            def node = delegate as Node
+
+            if (node.primaryNodeType.name == primaryNodeTypeName) {
                 closure(delegate)
             }
 
-            delegate.nodes.findAll { it.primaryNodeType.name == primaryNodeTypeName }.each { node ->
-                node.recurse(primaryNodeTypeName, closure)
+            node.nodes.findAll { it.primaryNodeType.name == primaryNodeTypeName }.each { child ->
+                child.recurse(primaryNodeTypeName, closure)
             }
         }
 
         recurse { Collection<String> primaryNodeTypeNames, Closure closure ->
-            if (primaryNodeTypeNames.contains(delegate.primaryNodeType.name)) {
-                closure(delegate)
+            def node = delegate as Node
+
+            if (primaryNodeTypeNames.contains(node.primaryNodeType.name)) {
+                closure(node)
             }
 
-            delegate.nodes.findAll { primaryNodeTypeNames.contains(it.primaryNodeType.name) }.each { node ->
-                node.recurse(primaryNodeTypeNames, closure)
+            node.nodes.findAll { primaryNodeTypeNames.contains(it.primaryNodeType.name) }.each { child ->
+                child.recurse(primaryNodeTypeNames, closure)
             }
         }
 
         get { String propertyName ->
             def result = null
 
-            if (delegate.hasProperty(propertyName)) {
-                def property = delegate.getProperty(propertyName)
+            def node = delegate as Node
+
+            if (node.hasProperty(propertyName)) {
+                def property = node.getProperty(propertyName)
 
                 if (property.multiple) {
-                    result = property.values.collect { getResult(delegate.session, it) }
+                    result = property.values.collect { getResult(node.session, it) }
                 } else {
-                    result = getResult(delegate.session, property.value)
+                    result = getResult(node.session, property.value)
                 }
             }
 
@@ -159,21 +171,23 @@ class DefaultMetaClassExtensionProvider implements MetaClassExtensionProvider {
         }
 
         set { String propertyName, value ->
+            def node = delegate as Node
+
             if (value == null) {
-                if (delegate.hasProperty(propertyName)) {
-                    delegate.getProperty(propertyName).remove()
+                if (node.hasProperty(propertyName)) {
+                    node.getProperty(propertyName).remove()
                 }
             } else {
-                def valueFactory = delegate.session.valueFactory
+                def valueFactory = node.session.valueFactory
 
                 if (value instanceof Object[] || value instanceof Collection) {
-                    def values = value.collect { valueFactory.createValue(it) }.toArray(new javax.jcr.Value[0])
+                    def values = value.collect { valueFactory.createValue(it) }.toArray(new Value[0])
 
-                    delegate.setProperty(propertyName, values)
+                    node.setProperty(propertyName, values)
                 } else {
                     def jcrValue = valueFactory.createValue(value)
 
-                    delegate.setProperty(propertyName, jcrValue)
+                    node.setProperty(propertyName, jcrValue)
                 }
             }
         }
@@ -185,18 +199,24 @@ class DefaultMetaClassExtensionProvider implements MetaClassExtensionProvider {
         }
 
         getOrAddNode { String name ->
-            delegate.hasNode(name) ? delegate.getNode(name) : delegate.addNode(name)
+            def node = delegate as Node
+
+            node.hasNode(name) ? node.getNode(name) : node.addNode(name)
         }
 
         getOrAddNode { String name, String primaryNodeTypeName ->
-            delegate.hasNode(name) ? delegate.getNode(name) : delegate.addNode(name, primaryNodeTypeName)
+            def node = delegate as Node
+
+            node.hasNode(name) ? node.getNode(name) : node.addNode(name, primaryNodeTypeName)
         }
 
         removeNode { String name ->
+            def node = delegate as Node
+
             boolean removed = false
 
-            if (delegate.hasNode(name)) {
-                delegate.getNode(name).remove()
+            if (node.hasNode(name)) {
+                node.getNode(name).remove()
                 removed = true
             }
 
@@ -204,10 +224,12 @@ class DefaultMetaClassExtensionProvider implements MetaClassExtensionProvider {
         }
 
         getNextSibling {
-            def siblings = delegate.parent.nodes
+            def node = delegate as Node
+
+            def siblings = node.parent.nodes
 
             while (siblings.hasNext()) {
-                if (delegate.isSame(siblings.nextNode())) {
+                if (node.isSame(siblings.nextNode())) {
                     break
                 }
             }
@@ -216,14 +238,16 @@ class DefaultMetaClassExtensionProvider implements MetaClassExtensionProvider {
         }
 
         getPrevSibling {
-            def siblings = delegate.parent.nodes
+            def node = delegate as Node
+
+            def siblings = node.parent.nodes
             def prevSibling = null
             def result = null
 
             while (siblings.hasNext()) {
                 def sibling = siblings.nextNode()
 
-                if (delegate.isSame(sibling)) {
+                if (node.isSame(sibling)) {
                     result = prevSibling
                     break
                 }
@@ -237,29 +261,27 @@ class DefaultMetaClassExtensionProvider implements MetaClassExtensionProvider {
 
     static def PAGE_METACLASS = {
         iterator {
-            delegate.listChildren()
+            (delegate as Page).listChildren()
         }
 
         recurse { Closure closure ->
             closure(delegate)
 
-            delegate.listChildren().each { child ->
+            (delegate as Page).listChildren().each { child ->
                 child.recurse(closure)
             }
         }
 
         getNode {
-            delegate.contentResource?.adaptTo(Node)
+            (delegate as Page).contentResource?.adaptTo(Node)
         }
 
         get { String name ->
-            def node = delegate.contentResource?.adaptTo(Node)
-
-            node?.get(name)
+            (delegate as Page).contentResource?.adaptTo(Node)?.get(name)
         }
 
         set { String name, value ->
-            def node = delegate.contentResource?.adaptTo(Node)
+            def node = (delegate as Page).contentResource?.adaptTo(Node)
 
             if (node) {
                 node.set(name, value)
