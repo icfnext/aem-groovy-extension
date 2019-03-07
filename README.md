@@ -25,7 +25,7 @@ See [Groovydocs](http://icfnext.github.io/aem-groovy-extension/groovydocs/index.
 
 ## Compatibility
 
-Groovy Extension Version(s) | AEM Version
+Groovy Extension Version(s) | AEM Version(s)
 ------------ | -------------
 7.x.x | 6.3, 6.4, 6.5
 6.x.x, 5.x.x | 6.4
