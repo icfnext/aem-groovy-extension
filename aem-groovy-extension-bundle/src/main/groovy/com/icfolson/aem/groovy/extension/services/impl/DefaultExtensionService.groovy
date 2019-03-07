@@ -4,12 +4,11 @@ import com.icfolson.aem.groovy.extension.api.MetaClassExtensionProvider
 import com.icfolson.aem.groovy.extension.services.ExtensionService
 import groovy.transform.Synchronized
 import groovy.util.logging.Slf4j
-import org.apache.felix.scr.annotations.Component
-import org.apache.felix.scr.annotations.Reference
-import org.apache.felix.scr.annotations.ReferenceCardinality
-import org.apache.felix.scr.annotations.ReferencePolicy
-import org.apache.felix.scr.annotations.Service
 import org.codehaus.groovy.runtime.InvokerHelper
+import org.osgi.service.component.annotations.Component
+import org.osgi.service.component.annotations.Reference
+import org.osgi.service.component.annotations.ReferenceCardinality
+import org.osgi.service.component.annotations.ReferencePolicy
 
 import java.util.concurrent.CopyOnWriteArrayList
 
@@ -17,26 +16,24 @@ import java.util.concurrent.CopyOnWriteArrayList
  * This default extension service exposes the set of registered metaclasses while providing for the binding and
  * unbinding of metaclass providers.
  */
-@Service(ExtensionService)
-@Component(immediate = true)
+@Component(service = ExtensionService, immediate = true)
 @Slf4j("LOG")
 class DefaultExtensionService implements ExtensionService {
 
-    @Reference(cardinality = ReferenceCardinality.OPTIONAL_MULTIPLE,
-        referenceInterface = MetaClassExtensionProvider, policy = ReferencePolicy.DYNAMIC)
-    private List<MetaClassExtensionProvider> metaClassExtensionProviders = new CopyOnWriteArrayList<>()
+    private volatile List<MetaClassExtensionProvider> metaClassExtensionProviders = new CopyOnWriteArrayList<>()
 
     @Override
     Set<Class> getMetaClasses() {
         def metaClasses = [] as LinkedHashSet
 
-        metaClassExtensionProviders.each {
-            metaClasses.addAll(it.metaClasses.keySet())
+        metaClassExtensionProviders.each { provider ->
+            metaClasses.addAll(provider.metaClasses.keySet())
         }
 
         metaClasses
     }
 
+    @Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC)
     @Synchronized
     void bindMetaClassExtensionProvider(MetaClassExtensionProvider extension) {
         metaClassExtensionProviders.add(extension)

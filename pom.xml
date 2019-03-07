@@ -1,27 +1,31 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
         <groupId>com.icfolson.aem</groupId>
         <artifactId>aem-parent-uber-jar</artifactId>
-        <version>6.4.1.1</version>
+        <version>7.0.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.icfolson.aem.groovy.extension</groupId>
     <artifactId>aem-groovy-extension</artifactId>
     <packaging>pom</packaging>
-    <version>6.0.0</version>
+    <version>7.0.0</version>
     <name>AEM Groovy Extension</name>
     <description>OSGi bundle containing Groovy builders and metaclasses for Adobe Experience Manager.</description>
 
+    <url>https://github.com/icfnext/aem-groovy-extension</url>
+
     <organization>
-        <name>Olson Digital</name>
-        <url>http://www.digitalatolson.com</url>
+        <name>ICF Next</name>
+        <url>http://www.icfnext.com</url>
     </organization>
 
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/OlsonDigital/aem-groovy-extension/issues</url>
+        <url>https://github.com/icfnext/aem-groovy-extension/issues</url>
     </issueManagement>
 
     <modules>
@@ -31,12 +35,13 @@
     </modules>
 
     <scm>
-        <connection>scm:git:git@github.com:OlsonDigital/aem-groovy-extension.git</connection>
-        <url>https://github.com/OlsonDigital/aem-groovy-extension</url>
-        <developerConnection>scm:git:git@github.com:OlsonDigital/aem-groovy-extension.git</developerConnection>
+        <connection>scm:git:git@github.com:icfnext/aem-groovy-extension.git</connection>
+        <url>https://github.com/icfnext/aem-groovy-extension</url>
+        <developerConnection>scm:git:git@github.com:icfnext/aem-groovy-extension.git</developerConnection>
     </scm>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.junit.usefile>false</maven.junit.usefile>
         <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss.SSSZ</maven.build.timestamp.format>
         <timestamp>${maven.build.timestamp}</timestamp>
@@ -181,7 +186,7 @@
                     <dependency>
                         <groupId>lt.velykis.maven.skins</groupId>
                         <artifactId>reflow-velocity-tools</artifactId>
-                        <version>1.0.0</version>
+                        <version>1.1.1</version>
                     </dependency>
                     <dependency>
                         <groupId>org.apache.velocity</groupId>
@@ -251,23 +256,30 @@
     </dependencyManagement>
 
     <dependencies>
-        <!-- inherited -->
-        <dependency>
-            <groupId>com.adobe.aem</groupId>
-            <artifactId>uber-jar</artifactId>
-            <classifier>apis</classifier>
-        </dependency>
         <dependency>
             <groupId>javax.jcr</groupId>
             <artifactId>jcr</artifactId>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>jsp-api</artifactId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>osgi.cmpn</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>osgi.core</artifactId>
         </dependency>
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.adobe.aem</groupId>
+            <artifactId>uber-jar</artifactId>
+            <classifier>apis</classifier>
         </dependency>
     </dependencies>
 </project>

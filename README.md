@@ -1,6 +1,6 @@
 # AEM Groovy Extension
 
-[Olson Digital](http://www.digitalatolson.com/)
+[ICF Next](http://www.icfnext.com/)
 
 ## Overview
 
@@ -16,14 +16,24 @@ new NodeBuilder(session).content {
 }
 ```
 
+See [Groovydocs](http://icfnext.github.io/aem-groovy-extension/groovydocs/index.html) for complete API documentation.
+
 ## Requirements
 
-* AEM 6.3 running on localhost:4502 (versions 1.x and above)
-* Versions 2.x.x through 3.x.x are compatible with AEM 6.2. 
-* Versions 1.x.x are compatible with AEM 6.1.
-* Versions 0.8.x - 0.9.x are compatible with AEM 6.0.
-* Versions 0.7.x and below are compatible with CQ 5.6
+* AEM 6.x running on localhost:4502
 * [Maven](http://maven.apache.org/) 3.x
+
+## Compatibility
+
+Groovy Extension Version(s) | AEM Version
+------------ | -------------
+7.x.x | 6.3, 6.4, 6.5
+6.x.x, 5.x.x | 6.4
+4.x.x | 6.3
+3.x.x, 2.x.x | 6.2
+1.x.x | 6.1
+0.9.x, 0.8.x | 6.0
+<= 0.7.x | 5.6 (CQ5)
 
 ## Usage and Installation
 
@@ -32,7 +42,7 @@ new NodeBuilder(session).content {
         <dependency>
             <groupId>com.icfolson.aem.groovy.extension</groupId>
             <artifactId>aem-groovy-extension-bundle</artifactId>
-            <version>4.0.0</version>
+            <version>7.0.0</version>
             <scope>provided</scope>
         </dependency>
 

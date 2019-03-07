@@ -27,10 +27,10 @@
             <topNav>reports</topNav>
             <brand>
                 <name>${project.name}</name>
-                <href>http://code.digitalatolson.com/aem-groovy-extension</href>
+                <href>./index.html</href>
             </brand>
             <slogan></slogan>
-            <body />
+            <body/>
             <bottomNav maxSpan="3">
                 <column>reports</column>
             </bottomNav>
@@ -39,7 +39,7 @@
 
     <body>
         <links>
-            <item name="GitHub" href="https://github.com/OlsonDigital/aem-groovy-extension"/>
+            <item name="GitHub" href="https://github.com/icfnext/aem-groovy-extension"/>
             <item name="GroovyDocs" href="groovydocs/index.html"/>
         </links>
         <menu ref="reports"/>
