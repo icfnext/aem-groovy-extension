@@ -1,0 +1,790 @@
+
+<!DOCTYPE html>
+<html  xml:lang="en" lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>Surefire Report | AEM Groovy Extension</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content="" />
+		<meta http-equiv="content-language" content="en" />
+		
+		<link href="./css/bootstrap.min.css" rel="stylesheet" />
+		<link href="./css/bootstrap-responsive.min.css" rel="stylesheet" />
+		<link href="./css/docs.css" rel="stylesheet" />
+		<link href="./css/reflow-skin.css" rel="stylesheet" />
+		<link href="./css/site.css" rel="stylesheet" />
+		
+		<link href="http://yandex.st/highlightjs/7.3/styles/github.min.css" rel="stylesheet" />
+		
+		<link href="./css/lightbox.css" rel="stylesheet" />
+		
+		<link href="./css/site.css" rel="stylesheet" />
+		<link href="./css/print.css" rel="stylesheet" media="print" />
+		
+		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+		<!--[if lt IE 9]>
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+
+	</head>
+
+	<body class="page-surefire-report project-aem-groovy-extension" data-spy="scroll" data-offset="60" data-target="#toc-scroll-target">
+
+		<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="container">
+					<div class="navbar-header">
+				      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
+				        <span class="sr-only">Toggle navigation</span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				      </button>
+				    
+					<a class="navbar-brand" href="index.html">AEM Groovy Extension</a>
+					</div>
+					<div class="collapse navbar-collapse">
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="./" title="GitHub">GitHub </a></li>
+							<li><a href="groovydocs/index.html" title="GroovyDocs">GroovyDocs </a></li>
+							<li class="dropdown active">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Project Documentation <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li class="dropdown-submenu">
+										<a href="project-info.html" title="Project Information">Project Information </a>
+										<ul class="dropdown-menu">
+											<li><a href="project-summary.html" title="Project Summary">Project Summary </a></li>
+											<li><a href="license.html" title="Project License">Project License </a></li>
+										</ul>
+									</li>
+									<li class="dropdown-submenu">
+										<a href="project-reports.html" title="Project Reports">Project Reports </a>
+										<ul class="dropdown-menu">
+											<li class="active"><a href="" title="Surefire Report">Surefire Report </a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div><!--/.nav-collapse -->
+				</div>
+		</nav>
+		
+	<div class="container">
+	
+	<!-- Masthead
+	================================================== -->
+
+	
+	
+	<header class="jumbotron subhead">
+		<div class="row" id="banner">
+			<div class="span12">
+				<div class="pull-left">
+					<a href="http://www.icfolson.com" id="bannerLeft"><img src="images/logo.jpg" alt="ICF Olson"></a>
+				</div>
+				<div class="pull-right">
+										<a href="index.html" id="bannerRight"><h1>AEM Groovy Extension</h1></a>
+					<p class="lead"></p>
+				</div>
+			</div>
+		</div>
+
+
+	
+		</header>
+
+	<div class="main-body">
+	<div class="row">
+		<div class="span12">
+			<div class="body-content">
+<script type="text/javascript">
+//<![CDATA[
+function toggleDisplay(elementId) {
+ var elm = document.getElementById(elementId + 'error');
+ if (elm && typeof elm.style != "undefined") {
+ if (elm.style.display == "none") {
+ elm.style.display = "";
+ document.getElementById(elementId + 'off').style.display = "none";
+ document.getElementById(elementId + 'on').style.display = "inline";
+ } else if (elm.style.display == "") { elm.style.display = "none";
+ document.getElementById(elementId + 'off').style.display = "inline";
+ document.getElementById(elementId + 'on').style.display = "none";
+ } 
+ } 
+ }
+//]]>
+</script> 
+<div class="section"> 
+ <h2 id="Surefire_Report">Surefire Report</h2> 
+</div> 
+<div class="section"> 
+ <h2 id="Summary">Summary</h2> 
+ <a name="Summary"></a> 
+ <p>[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</p> 
+ <br /> 
+ <table border="1" class="bodyTable table table-striped table-hover"> 
+  <thead> 
+   <tr class="a"> 
+    <th>Tests</th> 
+    <th>Errors </th> 
+    <th>Failures</th> 
+    <th>Skipped</th> 
+    <th>Success Rate</th> 
+    <th>Time</th> 
+   </tr> 
+  </thead> 
+  <tbody> 
+   <tr class="b"> 
+    <td>68</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>100%</td> 
+    <td>0.627</td> 
+   </tr> 
+  </tbody> 
+ </table> 
+ <br /> 
+ <p>Note: failures are anticipated and checked for with assertions while errors are unanticipated.</p> 
+ <br /> 
+</div> 
+<div class="section"> 
+ <h2 id="Package_List">Package List</h2> 
+ <a name="Package_List"></a> 
+ <p>[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</p> 
+ <br /> 
+ <table border="1" class="bodyTable table table-striped table-hover"> 
+  <thead> 
+   <tr class="a"> 
+    <th>Package</th> 
+    <th>Tests</th> 
+    <th>Errors </th> 
+    <th>Failures</th> 
+    <th>Skipped</th> 
+    <th>Success Rate</th> 
+    <th>Time</th> 
+   </tr> 
+  </thead> 
+  <tbody> 
+   <tr class="b"> 
+    <td><a href="#com.icfolson.aem.groovy.extension.services.impl">com.icfolson.aem.groovy.extension.services.impl</a></td> 
+    <td>51</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>100%</td> 
+    <td>0.388</td> 
+   </tr> 
+   <tr class="a"> 
+    <td><a href="#com.icfolson.aem.groovy.extension.builders">com.icfolson.aem.groovy.extension.builders</a></td> 
+    <td>17</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>100%</td> 
+    <td>0.239</td> 
+   </tr> 
+  </tbody> 
+ </table> 
+ <br /> 
+ <p>Note: package statistics are not computed recursively, they only sum up all of its testsuites numbers.</p> 
+ <div class="section"> 
+  <h3 id="com.icfolson.aem.groovy.extension.services.impl">com.icfolson.aem.groovy.extension.services.impl</h3> 
+  <a name="com.icfolson.aem.groovy.extension.services.impl"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th></th> 
+     <th>Class</th> 
+     <th>Tests</th> 
+     <th>Errors </th> 
+     <th>Failures</th> 
+     <th>Skipped</th> 
+     <th>Success Rate</th> 
+     <th>Time</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.groovy.extension.services.implBinaryMetaClassSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.groovy.extension.services.implBinaryMetaClassSpec">BinaryMetaClassSpec</a></td> 
+     <td>1</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.033</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><a href="#com.icfolson.aem.groovy.extension.services.implDefaultExtensionServiceSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.groovy.extension.services.implDefaultExtensionServiceSpec">DefaultExtensionServiceSpec</a></td> 
+     <td>6</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.051</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.groovy.extension.services.implNodeMetaClassSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.groovy.extension.services.implNodeMetaClassSpec">NodeMetaClassSpec</a></td> 
+     <td>29</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.237</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><a href="#com.icfolson.aem.groovy.extension.services.implOptionalMetaClassSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.groovy.extension.services.implOptionalMetaClassSpec">OptionalMetaClassSpec</a></td> 
+     <td>3</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.006</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.groovy.extension.services.implPageMetaClassSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.groovy.extension.services.implPageMetaClassSpec">PageMetaClassSpec</a></td> 
+     <td>9</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.023</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><a href="#com.icfolson.aem.groovy.extension.services.implServletRequestMetaClassSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.groovy.extension.services.implServletRequestMetaClassSpec">ServletRequestMetaClassSpec</a></td> 
+     <td>3</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.038</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="com.icfolson.aem.groovy.extension.builders">com.icfolson.aem.groovy.extension.builders</h3> 
+  <a name="com.icfolson.aem.groovy.extension.builders"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th></th> 
+     <th>Class</th> 
+     <th>Tests</th> 
+     <th>Errors </th> 
+     <th>Failures</th> 
+     <th>Skipped</th> 
+     <th>Success Rate</th> 
+     <th>Time</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.groovy.extension.buildersNodeBuilderSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.groovy.extension.buildersNodeBuilderSpec">NodeBuilderSpec</a></td> 
+     <td>10</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.147</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><a href="#com.icfolson.aem.groovy.extension.buildersPageBuilderSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.groovy.extension.buildersPageBuilderSpec">PageBuilderSpec</a></td> 
+     <td>7</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.092</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <br /> 
+</div> 
+<div class="section"> 
+ <h2 id="Test_Cases">Test Cases</h2> 
+ <a name="Test_Cases"></a> 
+ <p>[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</p> 
+ <div class="section"> 
+  <h3 id="NodeBuilderSpec">NodeBuilderSpec</h3> 
+  <a name="com.icfolson.aem.groovy.extension.buildersNodeBuilderSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>build unstructured node</td> 
+     <td>0.057</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>build node with type</td> 
+     <td>0.006</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>build node with properties</td> 
+     <td>0.035</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>build node with non-string properties</td> 
+     <td>0.015</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>build node with type and properties</td> 
+     <td>0.005</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>build node hierarchy</td> 
+     <td>0.005</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>build node hierarchy with type</td> 
+     <td>0.006</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>build node hierarchy with type and properties</td> 
+     <td>0.007</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>build node with root node</td> 
+     <td>0.005</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>build node with root path</td> 
+     <td>0.006</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="PageBuilderSpec">PageBuilderSpec</h3> 
+  <a name="com.icfolson.aem.groovy.extension.buildersPageBuilderSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>build page</td> 
+     <td>0.012</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>build page with properties</td> 
+     <td>0.011</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>build page with content</td> 
+     <td>0.015</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>build page with descendant node of given type</td> 
+     <td>0.01</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>build pages with content</td> 
+     <td>0.017</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>build page with root page</td> 
+     <td>0.021</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>build page with root path</td> 
+     <td>0.006</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="BinaryMetaClassSpec">BinaryMetaClassSpec</h3> 
+  <a name="com.icfolson.aem.groovy.extension.services.implBinaryMetaClassSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>execute closure and dispose binary</td> 
+     <td>0.033</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="DefaultExtensionServiceSpec">DefaultExtensionServiceSpec</h3> 
+  <a name="com.icfolson.aem.groovy.extension.services.implDefaultExtensionServiceSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>get metaclasses[0]</td> 
+     <td>0.006</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>get metaclasses[1]</td> 
+     <td>0.005</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>get metaclasses[2]</td> 
+     <td>0.007</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>metaclass is registered after binding extension provider</td> 
+     <td>0.011</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>metaclass is removed after unbinding extension provider</td> 
+     <td>0.01</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>additional metaclass for same class is preserved after unbinding extension provider</td> 
+     <td>0.012</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="NodeMetaClassSpec">NodeMetaClassSpec</h3> 
+  <a name="com.icfolson.aem.groovy.extension.services.implNodeMetaClassSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>iterator</td> 
+     <td>0.014</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>recurse</td> 
+     <td>0.01</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>recurse with type</td> 
+     <td>0.008</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>recurse with types</td> 
+     <td>0.008</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>get</td> 
+     <td>0.006</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>get multiple</td> 
+     <td>0.007</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>set[0]</td> 
+     <td>0.009</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>set[1]</td> 
+     <td>0.009</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>set[2]</td> 
+     <td>0.009</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>set[3]</td> 
+     <td>0.009</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>set[4]</td> 
+     <td>0.008</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>set[5]</td> 
+     <td>0.007</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>set null</td> 
+     <td>0.007</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>set binary</td> 
+     <td>0.024</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>set multiple[0]</td> 
+     <td>0.005</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>set multiple[1]</td> 
+     <td>0.009</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>set map</td> 
+     <td>0.007</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>get or add node[0]</td> 
+     <td>0.006</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>get or add node[1]</td> 
+     <td>0.006</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>get or add node with type[0]</td> 
+     <td>0.007</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>get or add node with type[1]</td> 
+     <td>0.006</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>move existing node</td> 
+     <td>0.007</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>remove non-existent node</td> 
+     <td>0.007</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>get next sibling[0]</td> 
+     <td>0.009</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>get next sibling[1]</td> 
+     <td>0.006</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>get next sibling with last sibling</td> 
+     <td>0.007</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>get prev sibling[0]</td> 
+     <td>0.007</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>get prev sibling[1]</td> 
+     <td>0.006</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>get prev sibling with first sibling</td> 
+     <td>0.007</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="OptionalMetaClassSpec">OptionalMetaClassSpec</h3> 
+  <a name="com.icfolson.aem.groovy.extension.services.implOptionalMetaClassSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>return true if optional is present</td> 
+     <td>0.004</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>return false if optional is absent</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>return false if optional is null</td> 
+     <td>0.001</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="PageMetaClassSpec">PageMetaClassSpec</h3> 
+  <a name="com.icfolson.aem.groovy.extension.services.implPageMetaClassSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>iterator</td> 
+     <td>0.009</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>recurse</td> 
+     <td>0.005</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>get node</td> 
+     <td>0.005</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>get node for page with no content</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>get[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>get[1]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>set[0]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>set[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>set for page with no content</td> 
+     <td>0.001</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="ServletRequestMetaClassSpec">ServletRequestMetaClassSpec</h3> 
+  <a name="com.icfolson.aem.groovy.extension.services.implServletRequestMetaClassSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>get parameter</td> 
+     <td>0.033</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>get parameter array</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td>non-existent parameter returns null</td> 
+     <td>0.002</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <br /> 
+</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+	</div><!-- /container -->
+	
+	<!-- Footer
+	================================================== -->
+	<footer class="well">
+		<div class="container">
+			<div class="row">
+				<div class="span3 bottom-nav">
+					<ul class="nav nav-list">
+						<li class="nav-header">Project Documentation</li>
+						<li>
+							<a href="project-info.html" title="Project Information">Project Information <i class="icon-chevron-right"></i></a>
+						</li>
+						<li>
+							<a href="project-reports.html" title="Project Reports">Project Reports <i class="icon-chevron-down"></i></a>
+							<ul class="nav nav-list">
+						<li class="active">
+							<a href="#" title="Surefire Report">Surefire Report </a>
+						</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+		
+	<div class="container subfooter">
+		<div class="row">
+			<div class="span12">
+				<p class="pull-right"><a href="#">Back to top</a></p>
+				<p class="copyright">Copyright &copy;2019 <a href="http://www.icfnext.com">ICF Next</a>. All Rights Reserved.</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- Le javascript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+
+	<!-- Fallback jQuery loading from Google CDN:
+	     http://stackoverflow.com/questions/1014203/best-way-to-use-googles-hosted-jquery-but-fall-back-to-my-hosted-library-on-go -->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script type="text/javascript">
+		if (typeof jQuery == 'undefined')
+		{
+			document.write(unescape("%3Cscript src='./js/jquery-1.8.3.min.js' type='text/javascript'%3E%3C/script%3E"));
+		}
+	</script>
+	
+	<script src="./js/bootstrap.min.js"></script>
+	<script src="./js/lightbox.js"></script>
+	<script src="./js/jquery.smooth-scroll.min.js"></script>
+	<!-- back button support for smooth scroll -->
+	<script src="./js/jquery.ba-bbq.min.js"></script>
+	<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+
+	<script src="./js/reflow-skin.js"></script>
+	<script src="https://use.typekit.net/rya5bvi.js"></script><script>try{Typekit.load({ async: true });}catch(e){}</script>
+	
+	</body>
+</html>
