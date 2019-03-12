@@ -1,0 +1,4 @@
+com.icfolson.aem.groovy.extension.api
+com.icfolson.aem.groovy.extension.builders
+com.icfolson.aem.groovy.extension.services
+com.icfolson.aem.groovy.extension.services.impl
